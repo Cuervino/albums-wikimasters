@@ -117,6 +117,7 @@
   #peek.sheet { left:0 !important; right:0; top:auto !important; bottom:0; padding:22px 12px calc(18px + env(safe-area-inset-bottom, 0px)); pointer-events:auto;
                 background:rgba(20,16,14,.96); border-radius:16px 16px 0 0; transform:translateY(20px); max-height:92vh; overflow-y:auto; }
   #peek.sheet.on { transform:none; }
+  #peek.sheet:not(.on) { pointer-events:none; }  /* a closed sheet must not keep catching taps */
   #peek.sheet .close { display:block; position:absolute; top:12px; right:14px; z-index:2; width:34px; height:34px; border-radius:50%; border:0;
                         background:rgba(255,255,255,.14); color:#fff; font:600 18px/34px system-ui; text-align:center; cursor:pointer; }
   @media (prefers-reduced-motion: reduce) { .stk { transition:none; } }
