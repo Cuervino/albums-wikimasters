@@ -204,6 +204,7 @@ body[data-state="vide"] .stk, body[data-state="own"] .slot:not(.own) .stk { disp
 .cover .prog .track { flex:1; height:12px; background:rgba(0,0,0,.35); border-radius:99px; overflow:hidden; border:1px solid rgba(241,234,216,.3); }
 .cover .prog .track i { display:block; height:100%; width:0; background:linear-gradient(90deg,#f6e6b0,#c9a24a); }
 .cover .chips { justify-content:flex-start; margin-top:10px; }
+.cover .synced { margin:10px 0 0; min-height:1.4em; font:500 12px/1.4 var(--sans); opacity:.8; }
 .cover .tagline { margin-top:16px; font:500 11px var(--cond); letter-spacing:.3em; text-transform:uppercase; opacity:.9; }
 /* hover card: the WikiMasters card shown large, views underneath */
 #peek { position:fixed; z-index:50; pointer-events:none; opacity:0; transform:scale(.96); transition:opacity .15s ease, transform .15s ease;
@@ -273,6 +274,7 @@ body[data-state="vide"] .stk, body[data-state="own"] .slot:not(.own) .stk { disp
     <div class="prog"><span id="cv-count"></span><span class="track"><i id="cv-bar"></i></span><span id="cv-pct"></span></div>
     <div class="chips" id="cv-chips"></div>
   </div>
+  <p class="synced" id="cv-sync"></p>
   <div class="tagline">122 cartes</div>
 </section>
 <section class="sp" id="garde"><div class="spread"><div class="page left flyleaf">
@@ -1649,5 +1651,12 @@ if (touch) {
 }
 addEventListener("keydown", e => { if (e.key === "Escape") hide(); });
 refresh();
+fetch("https://gist.githubusercontent.com/Cuervino/df338158ce35e9e7e89a0c230435ecae/raw/versailles-sync.json").then(r => r.json()).then(d => {
+  if (!d.last_sync) return;
+  const t = new Date(d.last_sync), tz = "Europe/Paris";
+  const day = t.toLocaleDateString("fr-FR", { day: "numeric", month: "long", timeZone: tz });
+  const time = t.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit", timeZone: tz }).replace(":", "h");
+  document.getElementById("cv-sync").textContent = `Collection de ced_visno synchronisée le ${day} à ${time}`;
+}).catch(() => {});
 </script>
 </body></html>
