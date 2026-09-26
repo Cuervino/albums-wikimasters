@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Albums WikiMasters</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;800&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0f0f0f; --panel:#181818; --line:#2a2a2a; --text:#ececec; --muted:#a3a3a3; --green:#34d399;
+          --heading:"Outfit", "Segoe UI", system-ui, sans-serif; --sans:"Inter", "Segoe UI", system-ui, sans-serif; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:15px/1.5 var(--sans); }
+  main { max-width:1080px; margin:0 auto; padding:56px 20px 64px; }
+  .brand { margin:0; font:700 15px var(--heading); letter-spacing:.02em; color:var(--green); }
+  .brand span { color:var(--text); }
+  h1 { margin:10px 0 8px; font:800 clamp(34px, 6vw, 52px)/1.05 var(--heading); }
+  .lead { margin:0; max-width:56ch; color:var(--muted); font-size:17px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:26px; margin-top:40px; }
+  .album { display:flex; flex-direction:column; background:var(--panel); border:1px solid var(--line); border-radius:16px; overflow:hidden;
+           color:inherit; text-decoration:none; transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+  .album:hover, .album:focus-visible { transform:translateY(-4px); border-color:var(--green); box-shadow:0 18px 40px -18px rgba(52,211,153,.35); outline:none; }
+  .album img { display:block; width:100%; aspect-ratio:3/4; object-fit:cover; object-position:top; background:#222; }
+  .info { display:flex; flex-direction:column; gap:6px; padding:16px 18px 20px; }
+  .info b { font:700 22px/1.15 var(--heading); }
+  .info span { color:var(--muted); }
+  .info small { align-self:flex-start; margin-top:4px; padding:3px 10px; border-radius:99px; font:600 12px var(--sans); color:var(--green);
+                background:rgba(52,211,153,.1); border:1px solid rgba(52,211,153,.3); }
+  footer { margin-top:48px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:13px; max-width:78ch; }
+  footer p { margin:0 0 8px; }
+  @media (prefers-reduced-motion: reduce) { .album { transition:none; } }
+</style></head>
+<body><main>
+  <p class="brand">Wiki<span>Masters</span> · albums de collection</p>
+  <h1>Choisis ton album</h1>
+  <p class="lead">Des albums à remplir pour ranger ses cartes WikiMasters par thème. Survole ou touche une carte pour la voir en grand, clique sur son nom pour lire l'article Wikipédia.</p>
+  <div class="grid"><a class="album" href="tetes-royales/">
+      <img src="tetes-royales/couverture.jpg" alt="Couverture de l'album Têtes royales">
+      <span class="info"><b>Têtes royales</b><span>Les Windsor en arbre généalogique, l&#x27;Europe de la reine Victoria et les cours d&#x27;aujourd&#x27;hui.</span><small>Collection d&#x27;Axle92</small></span>
+    </a><a class="album" href="guerre-froide/">
+      <img src="guerre-froide/couverture.jpg" alt="Couverture de l'album Guerre froide">
+      <span class="info"><b>Guerre froide</b><span>De Yalta à la chute de l&#x27;URSS, une double page par décennie.</span><small>Démonstration : 22 % des cartes collées au hasard</small></span>
+    </a></div>
+  <footer>
+    <p><b>Projet personnel, fait pour être partagé entre amis.</b> Il n'est pas destiné à être diffusé ni utilisé en dehors de ce cercle.</p>
+    <p>Le jeu, le nom et les visuels des cartes appartiennent à WikiMasters. Les images et les textes viennent de Wikipédia. Les valeurs d'attaque et de défense affichées sur les cartes sont fictives.</p>
+  </footer>
+</main></body></html>
