@@ -116,9 +116,10 @@ body[data-state="vide"] .stk, body[data-state="own"] .slot:not(.own) .stk { disp
 /* screen: dark with film strips top and bottom */
 .p-ecran { --ink:#efe8d8; --line:rgba(239,232,216,.45); --slotbg:rgba(255,255,255,.05); --kick:#e0b85c; background:
    repeating-linear-gradient(90deg, transparent 0 14px, #efe8d8 14px 26px, transparent 26px 40px) 0 10px/100% 12px no-repeat,
-   repeating-linear-gradient(90deg, transparent 0 14px, #efe8d8 14px 26px, transparent 26px 40px) 0 878px/100% 12px no-repeat,
+   repeating-linear-gradient(90deg, transparent 0 14px, #efe8d8 14px 26px, transparent 26px 40px) 0 calc(100% - 10px)/100% 12px no-repeat,
    radial-gradient(ellipse at 50% 0%, #2c2c34, #141418 70%); }
 .p-ecran h2 { color:#f3dc9a; }
+.p-ecran .folio { bottom:32px !important; }
 /* the palace spilling into town: warm stone with a small trident */
 .p-deborde { --kick:#7a5a1c; background:radial-gradient(ellipse at 100% 100%, rgba(212,166,74,.22), transparent 55%), #efe6d2; }
 /* palace: Versailles parquet */
@@ -235,7 +236,7 @@ body[data-state="vide"] .stk, body[data-state="own"] .slot:not(.own) .stk { disp
   .kicker, .page h2, .map .title { position:static !important; }
   .right .kicker, .right h2 { text-align:left; }
   .page h2, .map h2 { font-size:30px; margin-top:-16px; }
-  .p-ecran, .p-terrain { background-size:auto; }
+  .p-terrain { background:repeating-linear-gradient(90deg, #2f7a3c 0 70px, #2a7036 70px 140px); }
   .slot { position:relative !important; left:auto !important; top:auto !important; width:auto; }
   .frame { height:auto; aspect-ratio:160/224; }
   .wm { --cz:var(--czm, .6); }
