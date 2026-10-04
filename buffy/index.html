@@ -938,7 +938,7 @@
     document.getElementById("cv-chips").innerHTML = Object.keys(RC).map(r => {
       const all = CARDS.filter(c => c.r === r); if (!all.length) return "";
       return `<span class="chip" style="--rc:${RC[r]}"><b>${r}</b> ${all.filter(has).length}/${all.length}</span>`; }).join("");
-    const priced = miss.filter(c => c.a != null), unpriced = miss.length - priced.length;
+    const priced = CARDS.filter(c => c.a != null), unpriced = CARDS.length - priced.length;  // whole album, whatever the view
     document.getElementById("cv-budget").innerHTML = "Pour compléter : environ <b>" + fmt(priced.reduce((s, c) => s + c.a, 0)) + "</b> wikibidous au prix moyen"
       + (unpriced ? ", plus " + unpriced + " cartes sans vente connue." : ".");
     document.getElementById("cv-state").textContent = STATE[st];

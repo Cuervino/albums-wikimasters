@@ -1829,10 +1829,9 @@ function refresh() {
   document.getElementById("cv-chips").innerHTML = Object.keys(RC).map(r => {
     const all = CARDS.filter(c => c.r === r); if (!all.length) return "";
     return `<span class="chip" style="--rc:${RC[r]}"><b>${r}</b> ${all.filter(has).length}/${all.length}</span>`; }).join("");
-  const priced = miss.filter(c => c.a != null), unpriced = miss.length - priced.length, budget = document.getElementById("cv-budget");
-  budget.innerHTML = miss.length ? "Pour compléter : environ <b>" + priced.reduce((s, c) => s + c.a, 0).toLocaleString("fr-FR") + "</b> wikibidous au prix moyen"
-    + (unpriced ? ", plus " + unpriced + " carte" + (unpriced > 1 ? "s" : "") + " sans vente connue." : ".") : "";
-  budget.hidden = !miss.length;
+  const priced = CARDS.filter(c => c.a != null), unpriced = CARDS.length - priced.length, budget = document.getElementById("cv-budget");
+  budget.innerHTML = "Pour compléter : environ <b>" + priced.reduce((s, c) => s + c.a, 0).toLocaleString("fr-FR") + "</b> wikibidous au prix moyen"
+    + (unpriced ? ", plus " + unpriced + " carte" + (unpriced > 1 ? "s" : "") + " sans vente connue." : ".");
   document.getElementById("cl-lead").textContent = got.length + " / " + CARDS.length + " collés.";
   document.getElementById("grid-check").innerHTML = CARDS.map(c => `<li class="${has(c) ? "ok" : ""}" style="--rc:${RC[c.r]}" title="${c.t}">${c.n}</li>`).join("");
   document.getElementById("want-h").textContent = "Il me manque (" + miss.length + ")";
