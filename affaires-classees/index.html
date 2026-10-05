@@ -90,14 +90,99 @@
   .s-bizarre { --bg:radial-gradient(circle at 50% 50%, rgba(120,140,90,.35) 0 3px, transparent 3.5px) 0 0/28px 28px, radial-gradient(circle at 50% 50%, rgba(120,140,90,.25) 0 2px, transparent 2.5px) 14px 14px/28px 28px, #dfe3cf; --panel:rgba(240,242,230,.94); --panel-pad:6px 8px; }
   .s-bizarre .plate { transform:rotate(-3deg); transform-origin:left top; }
 
-  /* cover */
-  .cover { max-width:clamp(620px, 42vw, 760px); aspect-ratio:3/4; overflow:clip; display:flex; flex-direction:column; justify-content:space-between; margin:0 auto; padding:34px clamp(16px, 3vw, 36px); border-radius:6px; text-align:center; color:#f6f1e4; position:relative;
-           background:linear-gradient(170deg, #26406b, #15233d); filter:drop-shadow(0 16px 24px rgba(0,0,0,.5)); }
-  .cover::before { content:""; position:absolute; inset:12px; border:2px solid rgba(246,241,228,.6); border-radius:3px; pointer-events:none; }
-  .cover .brand { margin:6px 0 0; font:600 12px var(--wms); letter-spacing:.3em; text-transform:uppercase; opacity:.8; }
-  .cover h1 { margin:10px 0 0; font:700 clamp(40px, 7vw, 68px)/1 var(--plate); letter-spacing:.06em; text-transform:uppercase; }
-  .cover .sub { margin:8px 0 18px; font:17px var(--type); color:#e2d7bd; }
-  .cover .stats { margin:16px 0 4px; font:500 13px var(--wms); } .cover .stats p { margin:2px 0; } .cover .stats .big { font:700 18px var(--wms); }
+  /* cover: the police station at night, its offices as lit windows; the law courts beside it, the cellar under the street */
+  .cover { --stone:#d9c9a6; --stone-d:#bba77f; --zinc:#5d6a7b; --lit:#f6dc96; --lit2:#fff3c9; --night:#0f1a30;
+           container-type:inline-size; position:relative; isolation:isolate; max-width:clamp(620px, 42vw, 760px); aspect-ratio:3/4; overflow:clip;
+           display:flex; flex-direction:column; margin:0 auto; padding:26px clamp(14px, 3cqw, 28px) 20px; border-radius:6px; color:#f6f1e4;
+           background:linear-gradient(180deg, #0c1528 0%, #1b2d52 58%, #2c4470 72%, #2c2620 72.2%); filter:drop-shadow(0 16px 24px rgba(0,0,0,.5)); }
+  .cover::before { content:""; position:absolute; inset:10px; z-index:5; border:2px solid rgba(246,241,228,.55); border-radius:3px; pointer-events:none; }
+  .sky { position:absolute; inset:0 0 40% 0; z-index:-1; pointer-events:none;
+         background:radial-gradient(circle at 84% 27%, #fdf6dc 0 2.6%, rgba(253,246,220,.22) 2.8% 4.6%, transparent 5%),
+                    radial-gradient(circle, rgba(255,255,255,.8) 0 1px, transparent 1.5px) 0 0/97px 71px,
+                    radial-gradient(circle, rgba(255,255,255,.55) 0 .8px, transparent 1.3px) 31px 23px/61px 53px; }
+  .ctitle { text-align:center; }
+  .cover .brand { margin:4px 0 0; font:600 clamp(10px, 1.6cqw, 12px) var(--wms); letter-spacing:.3em; text-transform:uppercase; opacity:.8; }
+  .cover h1 { margin:6px 0 0; font:700 clamp(36px, 9cqw, 68px)/1 var(--plate); letter-spacing:.06em; text-transform:uppercase; text-shadow:0 3px 0 rgba(0,0,0,.35); }
+  .cover .sub { margin:6px 0 0; font:clamp(13px, 2.2cqw, 17px) var(--type); color:#e2d7bd; }
+  .lvl { display:block; font:700 clamp(8px, 1.3cqw, 10px)/1 var(--plate); letter-spacing:.22em; text-transform:uppercase; color:#3b3022; padding:3px 0 2px 2px; }
+
+  .town { position:relative; display:grid; grid-template-columns:minmax(0, 66fr) minmax(0, 34fr); gap:5%; align-items:end; margin-top:auto; padding:0 1.5%; }
+  .hq { position:relative; }
+  .chimneys { position:absolute; left:8%; right:8%; top:-16px; height:18px; display:flex; justify-content:space-between; pointer-events:none; }
+  .chimneys i { width:7%; height:100%; background:linear-gradient(90deg, #8a6c55, #6f5442); border-top:3px solid #4b3a2e; }
+  .chimneys i:nth-child(2) { margin-right:28%; }
+  .flag { position:absolute; right:3%; top:-50px; width:2px; height:52px; background:#ccc; }
+  .flag::after { content:""; position:absolute; left:2px; top:2px; width:26px; height:16px; background:linear-gradient(90deg, #2a4fa0 33%, #f4f1ea 33% 66%, #c8312a 66%); }
+  .mansard { position:relative; padding:4px 9% 6px; background:repeating-linear-gradient(90deg, rgba(255,255,255,.08) 0 1px, transparent 1px 9px), linear-gradient(180deg, #6b7889, var(--zinc));
+             clip-path:polygon(7% 0, 93% 0, 100% 100%, 0 100%); border-bottom:6px solid #e9dcc0; }
+  .mansard .lvl { color:#e9e2d3; text-align:center; }
+  .facade { background:repeating-linear-gradient(180deg, transparent 0 17px, rgba(90,70,40,.22) 17px 18px), linear-gradient(90deg, var(--stone-d), var(--stone) 8% 92%, var(--stone-d));
+            border-left:6px solid #c9b58e; border-right:6px solid #c9b58e; }
+  .storey { padding:2px 5% 0; border-bottom:5px solid #ece1c8; box-shadow:0 2px 0 rgba(0,0,0,.18); }
+  .bays { display:grid; grid-template-columns:1fr 1fr; gap:7%; align-items:end; padding-bottom:6px; }
+  .storey:last-child .bays { grid-template-columns:1fr auto 1fr; gap:4%; padding-bottom:0; }
+  .storey:last-child { border-bottom:0; box-shadow:none; }
+
+  .room { position:relative; display:grid; grid-template-columns:auto 1fr; grid-template-rows:auto auto 1fr; column-gap:6px; align-content:start; min-height:clamp(54px, 9.8cqw, 76px);
+          padding:6px 7px 5px; color:#2a2216; text-decoration:none; text-align:left; border:4px solid #f4ecda; border-bottom-width:6px;
+          background:radial-gradient(ellipse at 50% 0%, var(--lit2), var(--lit) 70%); box-shadow:inset 0 0 14px rgba(160,110,20,.35), 0 0 18px rgba(246,220,150,.35);
+          transition:filter .15s ease, transform .15s ease; }
+  .room:hover { filter:brightness(1.08) saturate(1.1); transform:translateY(-1px); }
+  .room:active { transform:translateY(1px); filter:brightness(.97); }
+  .room:focus-visible { outline:3px solid #f2c94c; outline-offset:2px; }
+  .room .ico { grid-row:1 / span 3; width:clamp(18px, 3.6cqw, 26px); height:clamp(18px, 3.6cqw, 26px); fill:none; stroke:#1d2f4f; stroke-width:1.7; stroke-linecap:round; stroke-linejoin:round; margin-top:1px; }
+  .room .rn { font:600 clamp(7px, 1.25cqw, 9.5px) var(--plate); letter-spacing:.2em; text-transform:uppercase; color:#6b5532; }
+  .room .rt { font:700 clamp(10px, 1.95cqw, 15px)/1.02 var(--plate); letter-spacing:.03em; text-transform:uppercase; color:#1d2f4f; }
+  .room .rp { align-self:end; display:flex; align-items:center; gap:5px; margin-top:3px; font:700 clamp(8px, 1.4cqw, 11px) var(--wms); color:#3b3022; }
+  .room .rp i { flex:1; height:4px; border-radius:2px; background:linear-gradient(90deg, #1d2f4f var(--pct), rgba(29,47,79,.18) var(--pct)); }
+  .room.dormer { border-radius:40% 40% 0 0 / 22% 22% 0 0; border-color:#e9dcc0; padding-top:10px; }
+  .room.low { min-height:clamp(46px, 8.4cqw, 64px); background:radial-gradient(ellipse at 50% 0%, #fde9b3, #e6c477 75%); border-color:#7b6a55;
+              box-shadow:inset 0 0 14px rgba(120,80,10,.4); }
+  .room.low::before { content:""; position:absolute; left:0; right:0; top:0; height:7px; background:repeating-linear-gradient(90deg, #3a3129 0 2px, transparent 2px 8px); opacity:.8; }
+  .room.tall { min-height:clamp(64px, 12cqw, 92px); border-color:#f1ead9; }
+  .room.closet { transform:rotate(-2.5deg); background:radial-gradient(ellipse at 50% 0%, #eef0d4, #c7cd98 75%); border-color:#7d6a4a; border-style:solid; }
+  .room.closet:hover { transform:rotate(-1deg) translateY(-1px); }
+
+  .entry { position:relative; align-self:stretch; display:flex; flex-direction:column; align-items:center; width:clamp(54px, 11cqw, 84px); }
+  .entry .sign { padding:2px 6px; background:#1d2f4f; color:#f6f1e4; font:700 clamp(7px, 1.3cqw, 10px) var(--plate); letter-spacing:.16em; text-transform:uppercase; border:1px solid #f6f1e4; white-space:nowrap; }
+  .entry .lantern { position:absolute; left:-20%; top:22%; padding:2px 3px; background:#2c5fbf; color:#fff; font:700 clamp(6px, 1.05cqw, 8px) var(--plate); letter-spacing:.1em; text-transform:uppercase;
+                    border:1px solid #cfe0ff; box-shadow:0 0 12px rgba(80,140,255,.8); }
+  .entry .door { flex:1; width:76%; margin-top:5px; min-height:40px; border-radius:50% 50% 0 0 / 22% 22% 0 0; border:3px solid #ece1c8; border-bottom:0;
+                 background:linear-gradient(90deg, #22384a 49%, #18293a 49% 51%, #22384a 51%); display:grid; place-items:start center; }
+  .entry .door b { margin-top:20%; font:700 clamp(8px, 1.5cqw, 11px) var(--plate); color:#e9d9a8; }
+  .entry .steps { width:100%; height:8px; background:linear-gradient(180deg, #d8cdb5 50%, #bdb19a 50%); }
+
+  .bridge { position:absolute; right:100%; width:16%; top:40%; height:clamp(14px, 3cqw, 22px); z-index:-1;
+            background:repeating-linear-gradient(90deg, #f6dc96 0 5px, #8a7a5e 5px 9px); border:3px solid #c9b58e; }
+  .palais { position:relative; display:flex; flex-direction:column; }
+  .pediment { position:relative; height:clamp(46px, 9cqw, 70px); background:linear-gradient(180deg, #ece2ca, #d8caa8); clip-path:polygon(50% 0, 100% 100%, 0 100%);
+              display:grid; place-items:end center; padding-bottom:6px; border-bottom:5px solid #f3ead6; }
+  .pediment span { font:700 clamp(7px, 1.3cqw, 10px) var(--plate); letter-spacing:.14em; text-transform:uppercase; color:#4b3c28; }
+  .colonnade { display:flex; flex-direction:column; gap:8px; padding:8px 16% 8px;
+               background:repeating-linear-gradient(90deg, #efe6cf 0 8%, #d4c5a2 8% 9%, #e3d7ba 9% 15%, transparent 15% 85%, #e3d7ba 85% 91%, #d4c5a2 91% 92%, #efe6cf 92%),
+                          linear-gradient(180deg, #cdbd98, #bfae88); }
+  .psteps { height:12px; background:linear-gradient(180deg, #e2d8c1 33%, #cfc3a8 33% 66%, #bdb19a 66%); margin:0 -6%; }
+
+  .street { position:relative; height:10px; margin:0 -40px; background:linear-gradient(180deg, #8d8a85 0 40%, #5c5955 40%); }
+  .lamp { position:absolute; left:calc(40px + 1%); bottom:10px; width:3px; height:clamp(80px, 16cqw, 120px); background:#2a2a2a; }
+  .lamp::before { content:""; position:absolute; left:-6px; top:-12px; width:15px; height:14px; background:#2a2a2a; clip-path:polygon(15% 0, 85% 0, 100% 100%, 0 100%); }
+  .lamp::after { content:""; position:absolute; left:-30px; top:-24px; width:63px; height:60px; border-radius:50%; background:radial-gradient(circle, rgba(255,226,140,.55), transparent 65%); }
+  .cellar { display:grid; grid-template-columns:minmax(0, 66fr) minmax(0, 34fr); gap:5%; padding:6px 1.5% 0;
+            background:radial-gradient(circle, rgba(0,0,0,.25) 0 1.5px, transparent 2px) 0 0/14px 11px; }
+  .vault { padding:0 5% 6px; background:linear-gradient(180deg, #6d5d4a, #54473a); border:5px solid #7b6a55; border-top:0; }
+  .vault .lvl, .shed .lvl { color:#e9dcc0; }
+  .shed { align-self:start; padding:8px 8% 0; text-align:center; }
+  .shed .lvl { margin-top:5px; }
+
+  .cover .stats { margin:10px auto 0; padding:6px 14px; text-align:center; font:500 clamp(11px, 1.8cqw, 13px) var(--wms); background:rgba(15,26,48,.75); border-radius:4px; }
+  .cover .stats p { margin:2px 0; } .cover .stats .big { font:700 clamp(14px, 2.6cqw, 18px) var(--wms); }
+  .bar-p { display:block; width:min(260px, 60cqw); height:6px; margin:3px auto 4px; border-radius:3px; background:linear-gradient(90deg, #f6dc96 var(--pct), rgba(246,241,228,.2) var(--pct)); }
+  @container (max-width: 520px) {
+    .town, .cellar { grid-template-columns:minmax(0, 1fr); gap:14px; }
+    .bridge { display:none; } .palais { width:82%; margin:0 auto; } .colonnade { flex-direction:row; padding:8px 10%; } .colonnade .room { flex:1; }
+    .shed { width:60%; margin:0 auto; padding-bottom:4px; }
+    .flag { display:none; } .hq::after { content:""; display:block; height:10px; margin:0 -30px; background:linear-gradient(180deg, #8d8a85 0 40%, #5c5955 40%); }
+  }
   .bar { position:sticky; top:env(safe-area-inset-top, 0px); z-index:30; display:flex; gap:6px; flex-wrap:wrap; justify-content:center; padding:10px 0; margin:0 -16px 24px;
          background:rgba(21,35,61,.94); backdrop-filter:blur(6px); border-bottom:1px solid rgba(246,241,228,.25); }
   .bar a { font:600 13px/1 var(--plate); letter-spacing:.14em; text-transform:uppercase; color:#f6f1e4; text-decoration:none; padding:7px 11px;
@@ -116,21 +201,6 @@
   .want button:hover { background:#e7ecf5; } .want button:active { background:#d3dcec; } .want button:focus-visible { outline:2px solid var(--navy); outline-offset:2px; }
   .want pre { margin:0; padding:12px; max-height:340px; overflow:auto; background:#fffaf0; border:1px solid rgba(29,26,22,.2); font:13px/1.5 var(--type); white-space:pre-wrap; }
   .foot { max-width:var(--w); margin:30px auto 0; font:13px var(--serif); color:#c9c3b6; text-align:center; }
-  .plan { display:grid; grid-template-columns:1fr minmax(0, .5fr); gap:10px; align-items:end; text-align:left; }
-  .roof { grid-column:1; height:24px; background:linear-gradient(180deg, transparent, transparent); border-bottom:4px solid #f6f1e4; clip-path:polygon(4% 100%, 50% 0, 96% 100%); background:#c9a46b; }
-  .main { grid-column:1; border:3px solid #f6f1e4; border-top:0; background:#f6f1e4; display:flex; flex-direction:column; gap:3px; }
-  .side { grid-column:2; grid-row:1 / span 2; display:flex; flex-direction:column; gap:10px; justify-content:flex-end; }
-  .fl, .annex, .closet { display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:3px; position:relative; padding-top:16px; background:#f6f1e4; }
-  .fl.under { background:#b8b0a0; margin-top:6px; }
-  .annex { grid-template-columns:1fr; border:3px solid #f6f1e4; } .closet { grid-template-columns:1fr; border:3px dashed #f6f1e4; padding-top:0; background:transparent; }
-  .fn { position:absolute; top:1px; left:6px; font:700 10px var(--plate); letter-spacing:.2em; text-transform:uppercase; color:#15233d; }
-  .room { display:flex; flex-direction:column; min-height:58px; padding:6px 8px; background:#2b4673; color:#f6f1e4; text-decoration:none; transition:background .15s ease, transform .15s ease; }
-  .room:hover { background:#3a5a8f; } .room:active { transform:translateY(1px); background:#1f3557; }
-  .room:focus-visible { outline:3px solid #f2c94c; outline-offset:-3px; }
-  .room .rn { font:600 10px var(--plate); letter-spacing:.2em; opacity:.8; }
-  .room .rt { font:700 15px/1.05 var(--plate); letter-spacing:.04em; text-transform:uppercase; }
-  .room .rp { margin-top:auto; font:600 11px var(--wms); opacity:.85; }
-  .r-bizarre { transform:rotate(-1.5deg); background:#5b6b3f; } .r-bizarre:hover { background:#6c7e4c; }
 
   @media (max-width: 600px) { .bar { flex-wrap:nowrap; justify-content:flex-start; overflow-x:auto; padding:8px 10px; } .bar a { flex:none; font-size:12px; } }
   @media (max-width: 900px) {
@@ -138,7 +208,6 @@
     .page.left, .page.right { border-radius:6px; } .page.left { margin-bottom:10px; }
     .page.left::after, .page.right::after { display:none; }
     .groups { grid-template-columns:minmax(0, 1fr); } .grp { grid-template-columns:minmax(0, 1fr); }
-    .plan { grid-template-columns:minmax(0, 1fr); } .side { grid-column:1; grid-row:auto; }
     :root { --card:clamp(80px, calc((100vw - 110px) / 3), 120px); }
   }
 
@@ -188,12 +257,30 @@
 </style></head><body>
 <nav class="bar"><a href="../" class="home">← Tous les albums</a><a href="#couverture">Couverture</a><a href="#et-0">Sous-sol</a><a href="#et-1">Rez-de-chaussée</a><a href="#et-2">1er étage</a><a href="#et-3">2e étage</a><a href="#et-4">3e étage</a><a href="#et-5">Palais de justice</a><a href="#et-6">Dernier étage</a><a href="#et-7">Le placard du fond</a><a href="#liste">Liste</a></nav>
 <div class="cover" id="couverture">
-  <p class="brand">Album de cartes WikiMasters</p>
-  <h1>Affaires classées</h1>
-  <p class="sub">Visite guidée du commissariat, du sous-sol au dernier étage</p>
-  <div class="plan"><div class="roof"></div><div class="main"><div class="fl"><span class="fn">Dernier étage</span><a class="room r-legislateur" href="#legislateur"><span class="rn">201</span><span class="rt">Bureau du législateur</span><span class="rp">4 / 10</span></a><a class="room r-ministre" href="#ministre"><span class="rn">301</span><span class="rt">Cabinet du ministre</span><span class="rp">1 / 13</span></a></div><div class="fl"><span class="fn">3e étage</span><a class="room r-courses" href="#courses"><span class="rn">023</span><span class="rt">Brigade des courses et jeux</span><span class="rp">0 / 11</span></a><a class="room r-interpol" href="#interpol"><span class="rn">031</span><span class="rt">Interpol</span><span class="rp">2 / 10</span></a></div><div class="fl"><span class="fn">2e étage</span><a class="room r-banditisme" href="#banditisme"><span class="rn">021</span><span class="rt">Répression du banditisme</span><span class="rp">0 / 12</span></a><a class="room r-financiere" href="#financiere"><span class="rn">022</span><span class="rt">Brigade financière</span><span class="rp">0 / 10</span></a></div><div class="fl"><span class="fn">1er étage</span><a class="room r-criminelle" href="#criminelle"><span class="rn">011</span><span class="rt">Brigade criminelle</span><span class="rp">0 / 7</span></a><a class="room r-scientifique" href="#scientifique"><span class="rn">012</span><span class="rt">Police scientifique</span><span class="rp">0 / 6</span></a></div><div class="fl"><span class="fn">Rez-de-chaussée</span><a class="room r-disparus" href="#disparus"><span class="rn">003</span><span class="rt">Personnes disparues</span><span class="rp">2 / 8</span></a><a class="room r-evasions" href="#evasions"><span class="rn">004</span><span class="rt">Parloir et évasions</span><span class="rp">0 / 8</span></a></div><div class="fl under"><span class="fn">Sous-sol</span><a class="room r-scelles" href="#scelles"><span class="rn">001</span><span class="rt">Salle des scellés</span><span class="rp">2 / 9</span></a><a class="room r-archives" href="#archives"><span class="rn">002</span><span class="rt">Archives</span><span class="rp">0 / 8</span></a></div></div>
-    <div class="side"><div class="annex"><span class="fn">Palais de justice</span><a class="room r-assises" href="#assises"><span class="rn">101</span><span class="rt">Cour d&#x27;assises</span><span class="rp">3 / 8</span></a><a class="room r-revision" href="#revision"><span class="rn">102</span><span class="rt">Révision</span><span class="rp">0 / 7</span></a></div><div class="closet"><a class="room r-bizarre" href="#bizarre"><span class="rn">404</span><span class="rt">Bureau des affaires bizarres</span><span class="rp">0 / 9</span></a></div></div></div>
+  <div class="sky" aria-hidden="true"></div>
+  <header class="ctitle"><p class="brand">Album de cartes WikiMasters</p><h1>Affaires classées</h1>
+    <p class="sub">Visite guidée du commissariat, du sous-sol au dernier étage</p></header>
+  <div class="town"><div class="hq">
+    <div class="chimneys" aria-hidden="true"><i></i><i></i><i></i></div><span class="flag" aria-hidden="true"></span>
+    <div class="mansard"><span class="lvl">Dernier étage</span><div class="bays"><a class="room dormer" href="#legislateur" style="--pct:40%"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M12 6c-2.5-1.5-5.5-2-9-1.5v14c3.5-.5 6.5 0 9 1.5 2.5-1.5 5.5-2 9-1.5v-14c-3.5-.5-6.5 0-9 1.5z"/><path d="M12 6v14"/></svg><span class="rn">Bureau 201</span><span class="rt">Bureau du législateur</span><span class="rp"><i></i>4 / 10</span></a><a class="room dormer" href="#ministre" style="--pct:8%"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><rect x="3" y="8" width="18" height="12" rx="1.5"/><path d="M9 8V5.5h6V8M3 13h18"/></svg><span class="rn">Bureau 301</span><span class="rt">Cabinet du ministre</span><span class="rp"><i></i>1 / 13</span></a></div></div>
+    <div class="facade">
+      <div class="storey"><span class="lvl">3e étage</span><div class="bays"><a class="room " href="#courses" style="--pct:0%"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7.5l3.3 2.4-1.2 3.9H9.9L8.7 9.9z"/><path d="M12 3v4.5M21 10.5l-5.7-.6M17.5 19.5l-3.4-5.7M6.5 19.5l3.4-5.7M3 10.5l5.7-.6"/></svg><span class="rn">Bureau 023</span><span class="rt">Brigade des courses et jeux</span><span class="rp"><i></i>0 / 11</span></a><a class="room " href="#interpol" style="--pct:20%"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg><span class="rn">Bureau 031</span><span class="rt">Interpol</span><span class="rp"><i></i>2 / 10</span></a></div></div>
+      <div class="storey"><span class="lvl">2e étage</span><div class="bays"><a class="room " href="#banditisme" style="--pct:0%"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M2.5 10c2-2 6-2.5 9.5-1 3.5-1.5 7.5-1 9.5 1-.5 3.5-3 5-5.5 5-1.8 0-3-1-4-2.2C11 14 9.8 15 8 15c-2.5 0-5-1.5-5.5-5z"/><path d="M6.5 11h2.5M15 11h2.5"/></svg><span class="rn">Bureau 021</span><span class="rt">Répression du banditisme</span><span class="rp"><i></i>0 / 12</span></a><a class="room " href="#financiere" style="--pct:0%"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><rect x="2.5" y="6" width="19" height="12" rx="1.5"/><circle cx="12" cy="12" r="2.8"/><path d="M5.5 9v6M18.5 9v6"/></svg><span class="rn">Bureau 022</span><span class="rt">Brigade financière</span><span class="rp"><i></i>0 / 10</span></a></div></div>
+      <div class="storey"><span class="lvl">1er étage</span><div class="bays"><a class="room " href="#criminelle" style="--pct:0%"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="1"/><circle cx="12" cy="10" r="3"/><path d="M7.5 18c.8-2.5 2.5-3.5 4.5-3.5s3.7 1 4.5 3.5"/></svg><span class="rn">Bureau 011</span><span class="rt">Brigade criminelle</span><span class="rp"><i></i>0 / 7</span></a><a class="room " href="#scientifique" style="--pct:0%"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.8 3h10.4a2 2 0 0 0 1.8-3l-5-9V3"/><path d="M7.5 15h9"/></svg><span class="rn">Bureau 012</span><span class="rt">Police scientifique</span><span class="rp"><i></i>0 / 6</span></a></div></div>
+      <div class="storey"><span class="lvl">Rez-de-chaussée</span><div class="bays"><a class="room " href="#disparus" style="--pct:25%"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c1-4 4-6 7-6s6 2 7 6"/><path d="M18 3.5c1.2-.8 3 .1 2.6 1.6-.3 1-1.6 1.1-1.6 2.2"/></svg><span class="rn">Bureau 003</span><span class="rt">Personnes disparues</span><span class="rp"><i></i>2 / 8</span></a><div class="entry" aria-hidden="true"><span class="sign">Commissariat</span><span class="lantern">Police</span><span class="door"><b>36</b></span><span class="steps"></span></div><a class="room " href="#evasions" style="--pct:0%"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M7 3v18M17 3v18M7 7h10M7 11h10M7 15h10M7 19h10"/></svg><span class="rn">Bureau 004</span><span class="rt">Parloir et évasions</span><span class="rp"><i></i>0 / 8</span></a></div></div>
+    </div>
+  </div><div class="palais"><span class="bridge" aria-hidden="true"></span>
+    <div class="pediment"><span>Palais de justice</span></div>
+    <div class="colonnade"><a class="room tall" href="#assises" style="--pct:38%"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M12 3v17M7 20h10M4 7h16"/><path d="M6.5 7L4 13h5zM17.5 7L15 13h5z"/><path d="M4 13a2.5 2.5 0 0 0 5 0M15 13a2.5 2.5 0 0 0 5 0"/></svg><span class="rn">Bureau 101</span><span class="rt">Cour d&#x27;assises</span><span class="rp"><i></i>3 / 8</span></a><a class="room tall" href="#revision" style="--pct:0%"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><circle cx="10" cy="10" r="6"/><path d="M14.5 14.5L21 21"/><path d="M7.5 10l2 2 3-4"/></svg><span class="rn">Bureau 102</span><span class="rt">Révision</span><span class="rp"><i></i>0 / 7</span></a></div>
+    <div class="psteps" aria-hidden="true"></div>
+  </div></div>
+  <div class="street" aria-hidden="true"><span class="lamp" aria-hidden="true"></span></div>
+  <div class="cellar">
+    <div class="vault"><span class="lvl">Sous-sol</span><div class="bays"><a class="room low" href="#scelles" style="--pct:22%"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M6 8h12l-1.2 12H7.2z"/><path d="M5.5 5h13v3h-13z"/><path d="M9 13h6"/></svg><span class="rn">Bureau 001</span><span class="rt">Salle des scellés</span><span class="rp"><i></i>2 / 9</span></a><a class="room low" href="#archives" style="--pct:0%"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="1"/><circle cx="8" cy="8" r="1.3"/><circle cx="16" cy="9" r="1.3"/><circle cx="11" cy="14" r="1.3"/><path d="M8 8l8 1-5 5z"/></svg><span class="rn">Bureau 002</span><span class="rt">Archives</span><span class="rp"><i></i>0 / 8</span></a></div></div>
+    <div class="shed"><a class="room closet" href="#bizarre" style="--pct:0%"><svg viewBox="0 0 24 24" class="ico" aria-hidden="true"><path d="M8.5 8.5a3.5 3.5 0 1 1 5 3.2c-1 .5-1.5 1.3-1.5 2.3v1"/><circle cx="12" cy="19" r=".6"/></svg><span class="rn">Bureau 404</span><span class="rt">Bureau des affaires bizarres</span><span class="rp"><i></i>0 / 9</span></a><span class="lvl">Le placard du fond</span></div>
+  </div>
   <div class="stats"><p>Collection de sergent tibs synchronisée le 5 octobre à 20h20</p><p class="big">14 / 136 cartes</p>
+    <span class="bar-p" style="--pct:10.3%"></span>
     </div>
 </div>
 <p class="floor" id="et-0">Sous-sol</p><div class="spread"><div class="page left s-scelles" id="scelles">
