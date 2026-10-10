@@ -201,22 +201,23 @@
   .ecrin .frame { --slot:#1b2a50; --sborder:0; --bign:rgba(243,226,180,.55); --heren:rgba(243,226,180,.8); box-shadow:inset 0 3px 8px rgba(0,0,0,.6); }
 
   /* cover: the lid of a chocolate box */
-  .cover { position:relative; overflow:clip; max-width:min(860px, 100%); margin:0 auto 46px; padding:clamp(28px, 4vw, 54px) clamp(16px, 3vw, 40px) 26px; border-radius:10px; text-align:center; color:#f3e7d4;
+  .cover { position:relative; overflow:clip; width:min(clamp(620px, 42vw, 700px), 100%); aspect-ratio:3/4; display:flex; flex-direction:column; margin:0 auto 46px; padding:clamp(28px, 4vw, 54px) clamp(16px, 3vw, 40px) 26px; border-radius:10px; text-align:center; color:#f3e7d4;
            background-color:#3b2416; scroll-margin-top:60px;
            background-image:repeating-linear-gradient(45deg, rgba(255,255,255,.035) 0 2px, transparent 2px 14px), repeating-linear-gradient(-45deg, rgba(0,0,0,.12) 0 2px, transparent 2px 14px),
                             radial-gradient(ellipse at 50% 30%, #55331f, #2e1a0f 80%);
            box-shadow:inset 0 0 0 6px #2a180e, inset 0 0 0 8px rgba(201,161,90,.55), 0 18px 30px rgba(0,0,0,.55); }
   .ribbon { position:absolute; z-index:1; background:linear-gradient(90deg, #8f2230, #b8323f 30%, #cf4552 50%, #b8323f 70%, #8f2230); }
   .ribbon.v { top:0; bottom:0; left:calc(50% - 22px); width:44px; }
-  .ribbon.h { left:0; right:0; top:calc(clamp(70px, 9vw, 110px) + 120px); height:44px; background:linear-gradient(180deg, #8f2230, #b8323f 30%, #cf4552 50%, #b8323f 70%, #8f2230); }
-  .bow { position:absolute; z-index:3; left:calc(50% - 80px); top:calc(clamp(70px, 9vw, 110px) - 8px); width:160px; height:70px; filter:drop-shadow(0 3px 4px rgba(0,0,0,.45)); }
-  .label { position:relative; z-index:2; margin:clamp(70px, 9vw, 110px) auto 0; width:min(440px, 92%); padding:28px 22px 26px; border-radius:50%;
+  .lid { position:relative; flex:1; display:grid; place-items:center; margin:0 calc(-1 * clamp(16px, 3vw, 40px)); }
+  .ribbon.h { left:0; right:0; top:calc(50% - 22px); height:44px; background:linear-gradient(180deg, #8f2230, #b8323f 30%, #cf4552 50%, #b8323f 70%, #8f2230); }
+  .bow { position:absolute; z-index:3; left:calc(50% - 80px); top:-58px; width:160px; height:70px; filter:drop-shadow(0 3px 4px rgba(0,0,0,.45)); }
+  .label { position:relative; z-index:2; margin:40px auto 0; width:min(440px, 86%); padding:28px 22px 26px; border-radius:50%;
            background:radial-gradient(ellipse at 50% 35%, #fbf4e6, #efe1c8); color:var(--cacao); box-shadow:0 0 0 3px #c9a15a, 0 0 0 7px #fbf4e6, 0 0 0 8.5px #c9a15a, 0 8px 18px rgba(0,0,0,.5); }
   .label .brand { margin:0; font:700 10.5px var(--label); letter-spacing:.28em; text-transform:uppercase; color:#8a6a3a; }
   .label h1 { margin:6px 0 0; font:700 clamp(48px, 6vw, 76px)/1 var(--title); color:var(--cacao); }
   .label .sub { margin:6px 0 0; font:italic 400 17px var(--serif); color:#6d4a33; }
   .label .owner { margin:12px 0 0; font:700 11px var(--label); letter-spacing:.18em; text-transform:uppercase; color:#9a4b57; }
-  .cover .stats { position:relative; z-index:2; margin:clamp(40px, 6vw, 70px) 0 0; padding:12px 14px; border-radius:8px; background:rgba(26,15,9,.88); text-align:left; }
+  .cover .stats { position:relative; z-index:2; margin:24px 0 0; padding:12px 14px; border-radius:8px; background:rgba(26,15,9,.88); text-align:left; }
   .prog { display:flex; align-items:center; gap:10px; font:600 13px var(--wms); }
   .track { flex:1; height:10px; border-radius:99px; background:rgba(255,255,255,.14); overflow:hidden; }
   .track i { display:block; height:100%; background:linear-gradient(90deg, #c9a15a, #e7c98a); }
@@ -251,7 +252,7 @@
   @media (max-width: 560px) {
     .label { border-radius:34px; padding:20px 14px; } .label .brand, .label .owner { letter-spacing:.14em; }
     .bar-nav { flex-wrap:nowrap; overflow-x:auto; justify-content:flex-start; gap:16px; scrollbar-width:none; } .bar-nav a { flex:none; font-size:11px; letter-spacing:.08em; }
-    .bow { top:12px; } .label { margin-top:84px; }
+    .cover { aspect-ratio:auto; min-height:560px; } .lid { min-height:330px; }
     .wrapper .flag { width:30px; height:20px; } .f-ch { width:20px; }
   }
 
@@ -301,17 +302,18 @@
 </style></head><body>
 <nav class="bar-nav"><a href="#couverture">Couverture</a><a href="#dp-0">Le comptoir</a><a href="#dp-1">La pâtisserie</a><a href="#dp-2">Pâques</a><a href="#dp-3">L&#x27;arbre et la fève</a><a href="#dp-4">De la fève à la poudre</a><a href="#dp-5">Suisse et Belgique</a><a href="#dp-6">France et Italie</a><a href="#dp-7">Europe et Royaume-Uni</a><a href="#dp-8">Amériques et ailleurs</a><a href="#dp-9">Charlie</a><a href="#dp-10">Les œufs du tsar</a><a href="#liste">Liste</a></nav>
 <div class="cover" id="couverture">
-  <div class="ribbon v"></div><div class="ribbon h"></div><svg class="bow" viewBox="0 0 160 70" aria-hidden="true">
+  <div class="ribbon v"></div>
+  <div class="lid"><div class="ribbon h"></div>
+  <div class="label"><svg class="bow" viewBox="0 0 160 70" aria-hidden="true">
     <path d="M80 35 C55 5 18 4 16 24 C14 44 52 46 80 35Z" fill="#b8323f"/><path d="M80 35 C105 5 142 4 144 24 C146 44 108 46 80 35Z" fill="#b8323f"/>
     <path d="M80 35 C60 18 34 16 30 25 C27 33 52 38 80 35Z" fill="#8f2230" opacity=".55"/><path d="M80 35 C100 18 126 16 130 25 C133 33 108 38 80 35Z" fill="#8f2230" opacity=".55"/>
     <path d="M76 37 L58 68 L66 66 L70 70 L80 40Z M84 37 L102 68 L94 66 L90 70 L80 40Z" fill="#a52a37"/>
     <ellipse cx="80" cy="35" rx="11" ry="9" fill="#cf4552"/></svg>
-  <div class="label">
     <p class="brand">Album de cartes WikiMasters</p>
     <h1>Chocolat</h1>
     <p class="sub">de la fève à la tablette</p>
     <p class="owner">Cet album appartient à Axle92</p>
-  </div>
+  </div></div>
   <div class="stats">
     <div class="prog"><span>11 / 139</span><span class="track"><i style="width:8%"></i></span><span>8 %</span></div>
     <div class="chips"><span class="chip" style="--rc:#ffe144"><b>L</b> 0/3</span><span class="chip" style="--rc:#fa9931"><b>UR</b> 2/12</span><span class="chip" style="--rc:#ed6fa3"><b>SR</b> 7/57</span><span class="chip" style="--rc:#c6a7f2"><b>R</b> 1/44</span><span class="chip" style="--rc:#b1cff2"><b>PC</b> 1/23</span></div>
