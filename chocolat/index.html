@@ -211,14 +211,14 @@
   .ribbon { position:absolute; z-index:1; background:linear-gradient(90deg, #8f2230, #b8323f 30%, #cf4552 50%, #b8323f 70%, #8f2230); }
   .ribbon.v { top:0; bottom:0; left:calc(50% - 22px); width:44px; }
   .lid { position:relative; flex:1; display:grid; place-items:center; margin:0 calc(-1 * clamp(16px, 3vw, 40px)); }
-  .ribbon.h { left:0; right:0; top:calc(50% - 22px); height:44px; background:linear-gradient(180deg, #8f2230, #b8323f 30%, #cf4552 50%, #b8323f 70%, #8f2230); }
+  .ribbon.h { left:0; right:0; top:calc(50% - 2px); height:44px; background:linear-gradient(180deg, #8f2230, #b8323f 30%, #cf4552 50%, #b8323f 70%, #8f2230); }
   .bow { position:absolute; z-index:3; left:calc(50% - 80px); top:-58px; width:160px; height:70px; filter:drop-shadow(0 3px 4px rgba(0,0,0,.45)); }
-  .label { position:relative; z-index:2; margin:40px auto 0; width:min(440px, 86%); padding:28px 22px 26px; border-radius:50%;
+  .label { position:relative; z-index:2; margin:40px auto 0; width:min(560px, 96%); padding:56px 30px 52px; border-radius:50%;
            background:radial-gradient(ellipse at 50% 35%, #fbf4e6, #efe1c8); color:var(--cacao); box-shadow:0 0 0 3px #c9a15a, 0 0 0 7px #fbf4e6, 0 0 0 8.5px #c9a15a, 0 8px 18px rgba(0,0,0,.5); }
-  .label .brand { margin:0; font:700 10.5px var(--label); letter-spacing:.28em; text-transform:uppercase; color:#8a6a3a; }
-  .label h1 { margin:6px 0 0; font:700 clamp(48px, 6vw, 76px)/1 var(--title); color:var(--cacao); }
-  .label .sub { margin:6px 0 0; font:italic 400 17px var(--serif); color:#6d4a33; }
-  .label .owner { margin:12px 0 0; font:700 11px var(--label); letter-spacing:.18em; text-transform:uppercase; color:#9a4b57; }
+  .label .brand { margin:0; font:700 12px var(--label); letter-spacing:.28em; text-transform:uppercase; color:#8a6a3a; }
+  .label h1 { margin:8px 0 0; font:700 clamp(58px, 7.4vw, 100px)/1 var(--title); color:var(--cacao); }
+  .label .sub { margin:8px 0 0; font:italic 400 20px var(--serif); color:#6d4a33; }
+  .label .owner { margin:14px 0 0; font:700 12px var(--label); letter-spacing:.18em; text-transform:uppercase; color:#9a4b57; }
   .cover .stats { position:relative; z-index:2; margin:24px 0 0; padding:12px 14px; border-radius:8px; background:rgba(26,15,9,.88); text-align:left; }
   .prog { display:flex; align-items:center; gap:10px; font:600 13px var(--wms); }
   .track { flex:1; height:10px; border-radius:99px; background:rgba(255,255,255,.14); overflow:hidden; }
@@ -252,7 +252,7 @@
     .row { flex-direction:column; align-items:flex-start; } .yr { width:auto; }
   }
   @media (max-width: 560px) {
-    .label { border-radius:34px; padding:20px 14px; } .label .brand, .label .owner { letter-spacing:.14em; }
+    .label { border-radius:34px; padding:22px 14px; width:calc(100% - 36px); } .label h1 { font-size:54px; } .label .sub { font-size:17px; } .label .brand, .label .owner { letter-spacing:.14em; }
     nav.bar { flex-wrap:nowrap; overflow-x:auto; justify-content:flex-start; gap:16px; scrollbar-width:none; } nav.bar a { flex:none; font-size:11px; letter-spacing:.08em; }
     .cover { aspect-ratio:auto; min-height:560px; } .lid { min-height:330px; }
     .wrapper .flag { width:30px; height:20px; } .f-ch { width:20px; }
