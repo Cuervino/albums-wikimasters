@@ -271,25 +271,27 @@
   .duo2025 .a1 { transform:rotate(-1.5deg); } .duo2025 .a2 { transform:rotate(1.5deg); margin-top:30px; }
   /* cover, portrait 3:4 */
   .cover { position:relative; width:min(clamp(620px, 42vw, 700px), 100%); aspect-ratio:3/4; margin:0 auto 40px; overflow:clip; background:#0b1f3a; color:#fff;
-    box-shadow:0 22px 44px -18px rgba(0,0,0,.9); display:flex; flex-direction:column; align-items:center; padding:7% 7% 6%; }
+    box-shadow:0 22px 44px -18px rgba(0,0,0,.9); display:flex; flex-direction:column; align-items:center; padding:5% 3.5% 3.5%; }
   .cover .bg { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:60% 40%; }
   .cover .flag { position:absolute; inset:0; background:linear-gradient(180deg, rgba(11,31,58,.2) 30%, rgba(11,31,58,.92) 78%); }
   .cover > *:not(.bg):not(.flag):not(.cut) { position:relative; z-index:2; }
   .cover .top { margin:0; font:500 13px "JetBrains Mono", monospace; letter-spacing:.14em; text-transform:uppercase; background:#0b1f3a; padding:4px 10px; }
-  .cover .logo { margin-top:10%; width:66%; box-shadow:0 10px 30px rgba(0,0,0,.5); }
-  .cover .years { margin:14px 0 0; font:400 26px "Anton", sans-serif; letter-spacing:.2em; background:#c8102e; padding:2px 12px; }
+  .cover .logo { margin-top:7%; width:80%; box-shadow:0 10px 30px rgba(0,0,0,.5); }
+  .cover .years { margin:16px 0 0; font:400 32px "Anton", sans-serif; letter-spacing:.2em; background:#c8102e; padding:2px 12px; }
   .cover .cvrow { display:flex; justify-content:space-between; align-items:flex-end; width:100%; margin-top:auto; padding:0 2%; }
   .cover .cvrow .cut { position:static; }
-  .cover .cv-noel { width:34%; transform:rotate(-4deg); }
-  .cover .cv-liam { width:22%; transform:rotate(3deg); }
-  .cover .owner { margin-top:10px; font:500 15px "Source Serif 4", serif; background:rgba(11,31,58,.9); padding:4px 12px; }
-  .cover .prog { width:100%; margin-top:12px; padding:12px 14px; background:rgba(11,31,58,.92); border-radius:10px; font:500 13px "JetBrains Mono", monospace; }
-  .cover .prog .row { display:flex; justify-content:space-between; }
-  .cover .bar { height:10px; margin:8px 0; border-radius:99px; background:rgba(255,255,255,.18); overflow:hidden; } .cover .bar i { display:block; height:100%; background:#4ade80; }
-  .cover .pills { display:flex; flex-wrap:wrap; gap:6px; }
-  .cover .pill { padding:2px 8px; border-radius:6px; background:color-mix(in srgb, var(--rc) 22%, transparent); border:1px solid var(--rc); font-size:12px; }
+  .cover .cv-noel { width:44%; transform:rotate(-4deg); }
+  .cover .cv-liam { width:29%; transform:rotate(3deg); }
+  .cover .owner { margin-top:10px; font:500 17px "Source Serif 4", serif; background:rgba(11,31,58,.9); padding:4px 12px; }
+  .cover .prog { width:100%; margin-top:12px; padding:14px 16px; background:rgba(8,20,40,.94); border:1px solid rgba(255,255,255,.14); border-radius:10px;
+    font:500 14px "JetBrains Mono", monospace; }
+  .cover .prog .row { display:flex; align-items:center; gap:12px; }
+  .cover .prog .cnt, .cover .prog .pct { flex:none; font-size:17px; }
+  .cover .bar { flex:1; height:10px; margin:0; border-radius:99px; background:rgba(255,255,255,.18); overflow:hidden; } .cover .bar i { display:block; height:100%; background:#4ade80; }
+  .cover .pills { display:flex; flex-wrap:wrap; gap:6px; margin-top:12px; }
+  .cover .pill { padding:3px 9px; border-radius:6px; background:color-mix(in srgb, var(--rc) 22%, transparent); border:1px solid var(--rc); font-size:13px; }
   .cover .pill b { color:var(--rc); }
-  .cover .sync { margin:8px 0 0; font-size:11px; opacity:.7; }
+  .cover .sync { margin:10px 0 0; font:400 13px "Inter", sans-serif; opacity:.85; }
   @media (max-width: 760px) {
     .collage { height:auto; padding-bottom:0; display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
     .collage > * { position:relative; inset:auto; width:46%; transform:none; }
@@ -297,7 +299,7 @@
     .chart { width:80%; } .cut.brothers { width:52%; }
     .th-bhn .kicker { margin-top:42%; } .th-end h2.back { margin-top:46%; }
     .bee, .polaroid { width:86%; margin-left:auto; margin-right:auto; }
-    .cover { padding:8% 6%; } .cover .cv-noel { width:27%; } .cover .cv-liam { width:17%; }
+    .cover { padding:8% 6%; } .cover .cv-noel { width:40%; } .cover .cv-liam { width:26%; }
   }
 
   nav.bar { position:sticky; top:env(safe-area-inset-top, 0px); z-index:30; display:flex; gap:6px; flex-wrap:wrap; justify-content:center;
@@ -308,7 +310,7 @@
   nav.bar a:focus-visible { outline:2px solid #ffd23f; outline-offset:2px; }
   .spread, .cover, .checklist { scroll-margin-top:64px; }
   .spread { margin-bottom:22px; }
-  .cover .evo { margin:4px 0 0; font-size:12px; }
+  .cover .evo { margin:4px 0 0; font:400 13px "Inter", sans-serif; opacity:.85; }
   .cover .wip { position:absolute !important; z-index:3; top:3.5%; right:-9%; padding:6px 44px; background:#ffd23f; color:#111; transform:rotate(35deg);
     font:700 12px "JetBrains Mono", monospace; letter-spacing:.1em; text-transform:uppercase; box-shadow:0 2px 6px rgba(0,0,0,.4); }
   .want { margin-top:10px; } .want h3 { display:inline-block; margin:0 10px 8px 0; font:400 22px "Anton", sans-serif; text-transform:uppercase; }
@@ -330,8 +332,8 @@
   <p class="years">1991-2026</p>
   <div class="cvrow"><img loading="lazy" decoding="async" class="deco cut cv-liam" src="assets/96_liam_sticker.webp" alt="Liam Gallagher, détouré"><img loading="lazy" decoding="async" class="deco cut cv-noel" src="assets/96_noel_sticker.webp" alt="Noel Gallagher, détouré"></div>
   <div class="owner">Cet album appartient à <b>sergent tibs</b></div>
-  <div class="prog"><div class="row"><span>Progression</span><span class="pct">41/120 (34 %)</span></div>
-    <div class="bar"><i style="width:34%"></i></div><div class="pills"><span class="pill" style="--rc:#ffe144"><b>L</b> 0/1</span><span class="pill" style="--rc:#fa9931"><b>UR</b> 4/13</span><span class="pill" style="--rc:#ed6fa3"><b>SR</b> 5/38</span><span class="pill" style="--rc:#c6a7f2"><b>R</b> 19/49</span><span class="pill" style="--rc:#b1cff2"><b>PC</b> 10/16</span><span class="pill" style="--rc:#b8f2d5"><b>C</b> 3/3</span></div>
+  <div class="prog"><div class="row"><b class="cnt">41 / 120</b><div class="bar"><i style="width:34%"></i></div><b class="pct">34 %</b></div>
+    <div class="pills"><span class="pill" style="--rc:#ffe144"><b>L</b> 0/1</span><span class="pill" style="--rc:#fa9931"><b>UR</b> 4/13</span><span class="pill" style="--rc:#ed6fa3"><b>SR</b> 5/38</span><span class="pill" style="--rc:#c6a7f2"><b>R</b> 19/49</span><span class="pill" style="--rc:#b1cff2"><b>PC</b> 10/16</span><span class="pill" style="--rc:#b8f2d5"><b>C</b> 3/3</span></div>
     <p class="sync">Collection de sergent tibs synchronisée le 21 octobre à 08h55</p></div>
   <p class="wip">En construction</p>
 </section><div id="ch-man" class="spread th-man th-zine">
