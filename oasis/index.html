@@ -301,7 +301,7 @@
   }
 
   nav.bar { position:sticky; top:env(safe-area-inset-top, 0px); z-index:30; display:flex; gap:6px; flex-wrap:wrap; justify-content:center;
-    padding:10px 0; margin:0 0 24px; background:rgba(11,31,58,.95); border-bottom:1px solid rgba(255,255,255,.2); }
+    padding:10px 16px; margin:0; background:#0b1f3a; border-bottom:1px solid rgba(255,255,255,.2); box-shadow:0 4px 12px rgba(0,0,0,.35); }
   nav.bar a { font:500 12px/1 "JetBrains Mono", monospace; letter-spacing:.08em; text-transform:uppercase; color:#f4efe6; text-decoration:none;
     padding:7px 10px; border:1px solid rgba(255,255,255,.3); border-radius:3px; transition:background .15s ease; }
   nav.bar a:hover { background:rgba(255,255,255,.16); } nav.bar a:active { background:rgba(255,255,255,.28); }
@@ -322,7 +322,7 @@
   }
   @media (max-width: 600px) { nav.bar { flex-wrap:nowrap; justify-content:flex-start; overflow-x:auto; padding:8px 10px; } nav.bar a { flex:none; } }
 </style></head>
-<body><div class="wrap"><nav class="bar"><a href="../" class="home">← Tous les albums</a><a href="#couverture">Couverture</a><a href="#ch-man">Manchester</a><a href="#ch-dm">1994</a><a href="#ch-mg">1995</a><a href="#ch-cb">Cool Britannia</a><a href="#ch-s96">1996</a><a href="#ch-bhn">1997-2002</a><a href="#ch-s09">2005-2009</a><a href="#ch-end">2017-2026</a><a href="#controle">Liste</a><a href="#vrac" class="vr-nav">En vrac</a></nav><section id="couverture" class="cover">
+<body><nav class="bar"><a href="../" class="home">← Tous les albums</a><a href="#couverture">Couverture</a><a href="#ch-man">Manchester</a><a href="#ch-dm">1994</a><a href="#ch-mg">1995</a><a href="#ch-cb">Cool Britannia</a><a href="#ch-s96">1996</a><a href="#ch-bhn">1997-2002</a><a href="#ch-s09">2005-2009</a><a href="#ch-end">2017-2026</a><a href="#controle">Liste</a><a href="#vrac" class="vr-nav">En vrac</a></nav><div class="wrap"><section id="couverture" class="cover">
   <img loading="lazy" decoding="async" class="bg" src="assets/cover_crowd_ht.webp" alt="">
   <div class="flag"></div>
   <p class="top">Album de cartes WikiMasters</p>
