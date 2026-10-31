@@ -418,6 +418,16 @@
   .bar a:hover, .bar button:hover { background:rgba(239,230,210,.12); }
   .bar button:focus-visible, .bar a:focus-visible { outline:2px solid #efe6d2; outline-offset:2px; }
   .bar button[aria-pressed="true"] { background:#efe6d2; color:#13263a; border-color:#efe6d2; }
+  .bar .more { position:relative; margin-left:auto; }
+  .bar .more summary { list-style:none; cursor:pointer; padding:2px 9px 6px; border-radius:999px; font:700 18px/1 system-ui, sans-serif; color:#efe6d2;
+    opacity:.45; transition:opacity .15s, background-color .15s; }
+  .bar .more summary::-webkit-details-marker { display:none; }
+  .bar .more summary:hover, .bar .more[open] summary, .bar .more.alt summary { opacity:1; background:rgba(239,230,210,.12); }
+  .bar .more summary:focus-visible { outline:2px solid #efe6d2; outline-offset:2px; opacity:1; }
+  .bar .more.alt summary::after { content:""; position:absolute; top:3px; right:3px; width:6px; height:6px; border-radius:50%; background:#f2c230; }
+  .bar .menu { position:absolute; right:0; top:calc(100% + 8px); z-index:40; display:flex; flex-direction:column; gap:4px; padding:8px; min-width:210px;
+    background:#0b1a2c; border:1px solid rgba(239,230,210,.25); border-radius:10px; box-shadow:0 12px 30px rgba(0,0,0,.5); }
+  .bar .menu button { text-align:left; white-space:nowrap; }
   .bar .sep { width:1px; height:20px; background:rgba(239,230,210,.25); margin:0 4px; }
   .cover .cprog { font:400 13px "Source Serif 4", serif; }
   .cover .prog { display:flex; gap:10px; align-items:center; font:600 15px "JetBrains Mono", monospace; }
@@ -446,12 +456,15 @@
   .bonus-lead { margin:14px 0 18px; padding:10px 14px; }
   /* hover: the slight straighten-and-rise of the collected card, as in Têtes royales (kit and bulk pages); the slot itself never lifts */
   .stk { transition:transform .2s; }
-  @media (max-width: 760px) { .bar { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; } .bar > * { flex:none; } }
+  @media (max-width: 760px) { .bar { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; } .bar > * { flex:none; }
+    .bar { backdrop-filter:none; background:#0b1a2c; }  /* a backdrop filter would trap the fixed menu inside the scrolling bar */
+    .bar .menu { position:fixed; right:12px; top:calc(env(safe-area-inset-top, 0px) + 54px); } }
   @media (max-width: 1100px) { .opening { grid-template-columns:1fr; } .cover { margin:0 auto; } }
   @media (max-width: 560px) { .cover { padding:28px 16px 16px; } .cover .tail { padding:10px 12px; } .toc { padding:22px 18px; } .toc .tr { font-size:11px; } }
 </style></head><body data-state="own">
 <nav class="bar"><a href="../" class="home">← Tous les albums</a><a href="#couverture">Couverture</a><a href="#controle">Liste de contrôle</a><a href="#bonus">Bonus</a><a href="#vrac" class="vr-nav">En vrac</a><span class="sep"></span>
-  <button data-state="own" aria-pressed="true">Collection de ced_visno</button><button data-state="vide" aria-pressed="false">Vide</button><button data-state="complet" aria-pressed="false">Complet</button></nav>
+  <details class="more"><summary aria-label="Autres affichages" title="Autres affichages">⋯</summary><div class="menu">
+    <button data-state="own" aria-pressed="true">Collection de ced_visno</button><button data-state="vide" aria-pressed="false">Album vide</button><button data-state="complet" aria-pressed="false">Album complet</button></div></details></nav>
 <p class="wip">Album en construction : pages, cartes et numéros peuvent encore bouger.</p>
 <div class="wrap">
 
@@ -2101,11 +2114,13 @@ function refresh() {
   document.getElementById("want-h").textContent = "Il me manque (" + miss.length + ")";
   document.getElementById("wantlist").textContent = miss.map(c => `${pad(c.n)}. ${c.t} (${c.r})`).join("\n");
 }
-document.querySelectorAll(".bar button").forEach(b => b.addEventListener("click", () => {
+document.querySelectorAll(".bar button[data-state]").forEach(b => b.addEventListener("click", () => {
   document.body.dataset.state = b.dataset.state;
-  document.querySelectorAll(".bar button").forEach(x => x.setAttribute("aria-pressed", x === b));
+  document.querySelectorAll(".bar button[data-state]").forEach(x => x.setAttribute("aria-pressed", x === b));
+  const more = b.closest("details"); more.open = false; more.classList.toggle("alt", b.dataset.state !== "own");
   refresh();
 }));
+document.addEventListener("click", e => { const m = document.querySelector(".bar .more"); if (m.open && !m.contains(e.target)) m.open = false; });
 document.getElementById("copy").addEventListener("click", async e => {
   try { await navigator.clipboard.writeText(document.getElementById("wantlist").textContent); e.target.textContent = "Copiée"; }
   catch { e.target.textContent = "Copie impossible"; }
