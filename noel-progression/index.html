@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Noël : la progression</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root { --bg:#0b1430; --bg2:#13224a; --panel:rgba(255,255,255,.045); --line:rgba(224,194,122,.18); --gold:#e0c27a; --gold2:#f3dfa8;
+          --text:#ece6d6; --muted:#a9b0c4; --dim:#6f7894; --green:#5fd39a;
+          --serif:"Playfair Display", Georgia, serif; --sans:"Inter", "Segoe UI", system-ui, sans-serif; }
+  * { box-sizing:border-box; }
+  html { background:#0a1128; }
+  body { margin:0; color:var(--text); font:15px/1.5 var(--sans); min-height:100vh;
+         background:radial-gradient(1200px 600px at 50% -200px, #1d3270 0%, transparent 70%) no-repeat, linear-gradient(var(--bg), #0a1128 900px) no-repeat, #0a1128; }
+  body::before { content:""; position:fixed; inset:0; pointer-events:none; opacity:.55;
+    background-image:radial-gradient(1px 1px at 20px 30px, #fff 50%, transparent 51%), radial-gradient(1px 1px at 140px 90px, #cfd8ff 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 260px 170px, #fff 50%, transparent 51%), radial-gradient(1px 1px at 330px 40px, #e8ecff 50%, transparent 51%);
+    background-size:380px 220px; }
+  main { position:relative; max-width:1040px; margin:0 auto; padding:28px 20px 64px; }
+  .home { color:var(--muted); text-decoration:none; font-size:14px; } .home:hover { color:var(--gold2); }
+  header { margin:26px 0 30px; text-align:center; }
+  .kicker { margin:0; font:600 12px var(--sans); letter-spacing:.18em; text-transform:uppercase; color:var(--gold); }
+  h1 { margin:6px 0 6px; font:800 clamp(36px, 6vw, 58px)/1.05 var(--serif); color:var(--gold2); }
+  .when { margin:0; color:var(--muted); }
+  .kpis { display:grid; grid-template-columns:2fr 1fr 1fr; gap:14px; margin:0 0 40px; }
+  .kpi { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px 18px; }
+  .kpi .l { font-size:13px; color:var(--muted); } .kpi .v { font:700 30px/1.15 var(--serif); color:var(--gold2); }
+  .kpi .v small { font:500 15px var(--sans); color:var(--muted); }
+  .track { height:8px; border-radius:4px; background:rgba(255,255,255,.08); overflow:hidden; margin-top:10px; }
+  .track span { display:block; height:100%; border-radius:4px; background:linear-gradient(90deg, #c9a35a, var(--gold2)); }
+  h2 { margin:0 0 4px; font:700 26px/1.2 var(--serif); color:var(--gold2); }
+  .sub { margin:0 0 14px; color:var(--muted); font-size:14px; max-width:80ch; }
+  section { margin-top:44px; }
+  .wrap { overflow-x:auto; border:1px solid var(--line); border-radius:14px; background:var(--panel); }
+  table { border-collapse:collapse; width:100%; }
+  th, td { padding:10px 12px; white-space:nowrap; border-bottom:1px solid rgba(255,255,255,.06); }
+  th { font:600 12px var(--sans); letter-spacing:.04em; text-transform:uppercase; color:var(--gold); text-align:left; background:rgba(224,194,122,.06); }
+  th.num, td.num { text-align:right; font-variant-numeric:tabular-nums; }
+  th.grp { text-align:center; border-bottom:1px solid var(--line); }
+  thead tr + tr th { text-transform:none; letter-spacing:0; color:var(--muted); font-weight:500; }
+  tbody tr:last-child td { border-bottom:none; }
+  td.zero { color:var(--dim); }
+  td.big { font:700 17px var(--sans); color:var(--gold2); }
+  td.sep, th.sep { border-left:1px solid var(--line); }
+  tr.tot td { background:rgba(224,194,122,.08); font-weight:700; border-top:1px solid var(--line); }
+  .dot { display:inline-block; width:10px; height:10px; border-radius:50%; margin-right:8px; box-shadow:0 0 0 1.5px rgba(12,21,48,.9); }
+  .rank { color:var(--dim); width:28px; }
+  .medal { display:inline-grid; place-items:center; width:22px; height:22px; border-radius:50%; font:700 12px var(--sans); color:#14203f; }
+  .bar { display:flex; align-items:center; gap:10px; min-width:170px; }
+  .bar .track { flex:1; margin:0; height:7px; }
+  .bar b { font-weight:600; min-width:52px; text-align:right; font-variant-numeric:tabular-nums; }
+  .owner { color:var(--muted); }
+  .q { color:var(--gold); font-weight:700; }
+  .plus { color:var(--green); font-weight:600; }
+  .others td { color:var(--muted); }
+  footer { margin-top:40px; color:var(--dim); font-size:13px; }
+  @media (max-width:640px) { .kpis { grid-template-columns:1fr 1fr; } .kpis .kpi:first-child { grid-column:1 / -1; } h2 { font-size:22px; } }
+</style></head>
+<body><main>
+<a class="home" href="../">← Tous les albums</a>
+<header>
+  <p class="kicker">Noël, l'album commun</p>
+  <h1>La progression</h1>
+  <p class="when" id="when"></p>
+</header>
+
+<div class="kpis" id="kpis"></div>
+
+<section>
+  <h2>Les joueurs</h2>
+  <p class="sub">Ce que chacun a posé dans son thème et dans chaque catégorie du pool commun. Une carte posée par deux joueurs à la même lecture compte pour chacun.</p>
+  <div class="wrap"><table>
+    <thead><tr><th rowspan="2"></th><th rowspan="2">Joueur</th><th class="num" rowspan="2">Son thème</th><th class="grp sep" colspan="6">Pool commun</th><th class="num sep" rowspan="2">Posées</th><th class="num" rowspan="2">Bonus</th></tr>
+      <tr id="poolh"></tr></thead>
+    <tbody id="joueurs"></tbody>
+  </table></div>
+</section>
+
+<section>
+  <h2>Les chapitres</h2>
+  <p class="sub">Le pool commun est ouvert à tous ; un thème, à son propriétaire seulement. Films de Noël et Animation, séries et acteurs, restés sans propriétaire, font partie du pool commun.</p>
+  <div class="wrap"><table>
+    <thead><tr><th>Chapitre</th><th>Propriétaire</th><th class="num">Posées</th><th class="num">Nouvelles</th><th>Remplissage</th><th class="num">Manquantes</th></tr></thead>
+    <tbody id="chapitres"></tbody>
+  </table></div>
+  <p class="sub" style="margin-top:10px">Bonus : les cartes étiquetées Noël sans case ouverte dans l'album. Elles comptent pour le pool commun, sans catégorie (d'où le <span class="q">?</span>).</p>
+</section>
+
+<section class="others">
+  <h2>Les autres albums en cours</h2>
+  <p class="sub" id="autres-when"></p>
+  <div class="wrap"><table>
+    <thead><tr><th>Album</th><th class="num">Cartes</th><th>Remplissage</th><th class="num">Manquantes</th></tr></thead>
+    <tbody id="autres"></tbody>
+  </table></div>
+</section>
+<footer>Projet entre amis. Jeu, nom et visuels à WikiMasters, images Wikipédia.</footer>
+</main>
+<script>
+  const DATA = {"when": "Collections lues le 25 novembre à 7h54. Album ouvert le 24 novembre à 22h00.", "prev_label": "Depuis l'ouverture", "autres_when": "Plus mis à jour depuis le 25 novembre. Dernière lecture : 24 novembre à 12h47.", "bonus": 11, "COLORS": {"MarionEddie": "#e07a5f", "ced_visno": "#3d9be9", "Axle92": "#5fae8a", "sergent tibs": "#e3b23c", "Dahevic": "#a77bdc", "Cuervo": "#e57fa8"}, "POOL": ["Nativité", "Traditions", "Saints", "Origines", "Films", "Animation"], "JOUEURS": [["MarionEddie", 3, [1, 0, 0, 0, 0, 1], 6], ["ced_visno", 5, [2, 0, 0, 0, 0, 0], 1], ["Axle92", 9, [1, 0, 0, 0, 0, 0], 3], ["sergent tibs", 5, [6, 0, 0, 0, 0, 0], 0], ["Dahevic", 0, [0, 0, 0, 0, 0, 0], 0], ["Cuervo", 0, [1, 0, 0, 0, 0, 0], 1]], "CHAPITRES": [["La Nativité", null, 62, 10, 0], ["Traditions et symboles", null, 55, 0, 0], ["Saints et porteurs de cadeaux", null, 24, 0, 0], ["Origines et fêtes d'hiver", null, 16, 0, 0], ["Films de Noël", null, 53, 0, 0], ["Animation, séries et acteurs", null, 58, 1, 0], ["Table de Noël", "ced_visno", 82, 5, 0], ["Jouets et cadeaux", "Dahevic", 37, 0, 0], ["Hiver et nature", "Cuervo", 33, 0, 0], ["Marchés, villes et Noël dans le monde", "sergent tibs", 62, 5, 0], ["Histoire, pop culture et pub", "MarionEddie", 36, 3, 0], ["Musique et littérature", "Axle92", 63, 9, 0]], "AUTRES": [["Ovalini", 142, 129], ["Le Grand Recensement", 225, 78]]};
+  const { COLORS, POOL, JOUEURS, CHAPITRES, AUTRES } = DATA;
+  document.getElementById("when").textContent = DATA.when;
+  document.getElementById("autres-when").textContent = DATA.autres_when;
+  const fr = n => n.toLocaleString("fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const num = (n, cls = "") => `<td class="num ${n ? "" : "zero"} ${cls}">${n}</td>`;
+  const who = p => `<i class="dot" style="background:${COLORS[p]}"></i>${p}`;
+  const bar = (n, total) => `<td><div class="bar"><div class="track"><span style="width:${100 * n / total}%"></span></div><b>${fr(100 * n / total)} %</b></div></td>`;
+  const MEDALS = ["#f3dfa8", "#cfd6e4", "#d9a57a"];
+
+  document.getElementById("poolh").innerHTML = POOL.map((c, i) => `<th class="num${i ? "" : " sep"}">${c}</th>`).join("");
+  const J = JOUEURS.map(([name, own, pool, bonus]) => ({ name, own, pool, bonus, tot: own + pool.reduce((a, b) => a + b, 0) }))
+    .sort((x, y) => y.tot - x.tot || y.bonus - x.bonus);
+  const sum = f => J.reduce((a, r) => a + f(r), 0);
+  document.getElementById("joueurs").innerHTML = J.map((r, i) =>
+    `<tr><td class="rank">${r.tot && i < 3 ? `<span class="medal" style="background:${MEDALS[i]}">${i + 1}</span>` : i + 1}</td><td>${who(r.name)}</td>${num(r.own)}`
+    + r.pool.map((n, k) => num(n, k ? "" : "sep")).join("") + num(r.tot, "big sep") + num(r.bonus) + `</tr>`).join("")
+    + `<tr class="tot"><td></td><td>Tous les joueurs</td>${num(sum(r => r.own))}` + POOL.map((_, k) => num(sum(r => r.pool[k]), k ? "" : "sep")).join("")
+    + num(sum(r => r.tot), "sep") + num(sum(r => r.bonus)) + `</tr>`;
+
+  const C = [...CHAPITRES].sort((a, b) => b[3] / b[2] - a[3] / a[2] || b[3] - a[3]);
+  const T = CHAPITRES.reduce((a, c) => [a[0] + c[2], a[1] + c[3], a[2] + c[4]], [0, 0, 0]);
+  document.getElementById("chapitres").innerHTML = C.map(([name, owner, cases, posed, prev]) =>
+    `<tr><td>${name}</td><td class="owner">${owner ? who(owner) : "Pool commun"}</td><td class="num">${posed} / ${cases}</td>`
+    + `<td class="num">${posed > prev ? `<span class="plus">+${posed - prev}</span>` : '<span style="color:var(--dim)">0</span>'}</td>`
+    + bar(posed, cases) + num(cases - posed) + `</tr>`).join("")
+    + `<tr class="tot"><td>Tout l'album</td><td></td><td class="num">${T[1]} / ${T[0]}</td><td class="num"><span class="plus">+${T[1] - T[2]}</span></td>${bar(T[1], T[0])}${num(T[0] - T[1])}</tr>`;
+
+  document.getElementById("kpis").innerHTML =
+    `<div class="kpi"><div class="l">Cartes posées</div><div class="v">${T[1]} <small>sur ${T[0]} cartes ouvertes, ${fr(100 * T[1] / T[0])} %</small></div><div class="track"><span style="width:${100 * T[1] / T[0]}%"></span></div></div>`
+    + `<div class="kpi"><div class="l">${DATA.prev_label}</div><div class="v">+${T[1] - T[2]}</div></div>`
+    + `<div class="kpi"><div class="l">En bonus</div><div class="v">${DATA.bonus} <span class="q">?</span></div></div>`;
+  document.getElementById("autres").innerHTML = AUTRES.map(([name, total, own]) =>
+    `<tr><td>${name}</td><td class="num">${own} / ${total}</td>${bar(own, total)}${num(total - own)}</tr>`).join("");
+</script>
+</body></html>
