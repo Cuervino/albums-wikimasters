@@ -52,6 +52,14 @@
   .q { color:var(--gold); font-weight:700; }
   .plus { color:var(--green); font-weight:600; }
   .others td { color:var(--muted); }
+  .chart-box { border:1px solid var(--line); border-radius:14px; background:var(--panel); padding:14px 14px 6px; position:relative; }
+  .legend { display:flex; flex-wrap:wrap; gap:18px; font-size:13px; color:var(--muted); margin:0 0 6px 4px; }
+  .legend i { display:inline-block; width:16px; height:3px; border-radius:2px; vertical-align:middle; margin-right:7px; }
+  #courbe { width:100%; display:block; overflow:visible; }
+  #courbe text { fill:var(--muted); font:12px var(--sans); font-variant-numeric:tabular-nums; }
+  #courbe text.lbl { fill:var(--text); font-weight:600; }
+  .tip { position:absolute; pointer-events:none; background:#f3efe2; color:#14203f; padding:7px 10px; border-radius:8px; font-size:12.5px; line-height:1.4;
+         white-space:nowrap; transform:translate(-50%, calc(-100% - 12px)); z-index:2; box-shadow:0 4px 14px rgba(0,0,0,.35); }
   footer { margin-top:40px; color:var(--dim); font-size:13px; }
   @media (max-width:640px) { .kpis { grid-template-columns:1fr 1fr; } .kpis .kpi:first-child { grid-column:1 / -1; } h2 { font-size:22px; } }
 </style></head>
@@ -64,6 +72,15 @@
 </header>
 
 <div class="kpis" id="kpis"></div>
+
+<section style="margin-top:0">
+  <h2>Cartes posées et cartes ouvertes</h2>
+  <p class="sub">Ouvertes : cartes ouvertes dans l'album. Posées : lues à chaque lecture des collections (les cartes du bonus ne comptent pas).</p>
+  <div class="chart-box">
+    <div class="legend"><span><i style="background:var(--gold)"></i>Ouvertes</span><span><i style="background:var(--green)"></i>Posées</span></div>
+    <svg id="courbe"></svg>
+  </div>
+</section>
 
 <section>
   <h2>Les joueurs</h2>
@@ -96,7 +113,7 @@
 <footer>Projet entre amis. Jeu, nom et visuels à WikiMasters, images Wikipédia.</footer>
 </main>
 <script>
-  const DATA = {"when": "Collections lues le 25 novembre à 21h16. Lecture précédente : 25 novembre à 7h54.", "prev_label": "Depuis la lecture précédente", "autres_when": "Plus mis à jour depuis le 25 novembre. Dernière lecture : 24 novembre à 12h47.", "bonus": 34, "COLORS": {"MarionEddie": "#e07a5f", "ced_visno": "#3d9be9", "Axle92": "#5fae8a", "sergent tibs": "#e3b23c", "Dahevic": "#a77bdc", "Cuervo": "#e57fa8"}, "POOL": ["Nativité", "Traditions", "Saints", "Origines", "Films", "Animation"], "JOUEURS": [["MarionEddie", 14, [2, 2, 0, 2, 8, 5], 16], ["ced_visno", 32, [8, 14, 8, 5, 0, 0], 8], ["Axle92", 18, [2, 0, 3, 0, 1, 4], 4], ["sergent tibs", 27, [9, 0, 0, 0, 0, 0], 0], ["Dahevic", 0, [0, 0, 0, 0, 0, 0], 0], ["Cuervo", 2, [1, 0, 0, 0, 0, 0], 8]], "CHAPITRES": [["La Nativité", null, 62, 21, 10], ["Traditions et symboles", null, 55, 15, 0], ["Saints et porteurs de cadeaux", null, 24, 9, 0], ["Origines et fêtes d'hiver", null, 16, 7, 0], ["Films de Noël", null, 53, 9, 0], ["Animation, séries et acteurs", null, 58, 9, 1], ["Table de Noël", "ced_visno", 82, 32, 5], ["Jouets et cadeaux", "Dahevic", 37, 0, 0], ["Hiver et nature", "Cuervo", 33, 2, 0], ["Marchés, villes et Noël dans le monde", "sergent tibs", 62, 27, 5], ["Histoire, pop culture et pub", "MarionEddie", 36, 14, 3], ["Musique et littérature", "Axle92", 63, 18, 9]], "AUTRES": [["Ovalini", 142, 129], ["Le Grand Recensement", 225, 78]]};
+  const DATA = {"when": "Collections lues le 25 novembre à 21h16. Lecture précédente : 25 novembre à 7h54.", "prev_label": "Depuis la lecture précédente", "autres_when": "Plus mis à jour depuis le 25 novembre. Dernière lecture : 24 novembre à 12h47.", "bonus": 34, "COLORS": {"MarionEddie": "#e07a5f", "ced_visno": "#3d9be9", "Axle92": "#5fae8a", "sergent tibs": "#e3b23c", "Dahevic": "#a77bdc", "Cuervo": "#e57fa8"}, "POOL": ["Nativité", "Traditions", "Saints", "Origines", "Films", "Animation"], "JOUEURS": [["MarionEddie", 14, [2, 2, 0, 2, 8, 5], 16], ["ced_visno", 32, [8, 14, 8, 5, 0, 0], 8], ["Axle92", 18, [2, 0, 3, 0, 1, 4], 4], ["sergent tibs", 27, [9, 0, 0, 0, 0, 0], 0], ["Dahevic", 0, [0, 0, 0, 0, 0, 0], 0], ["Cuervo", 2, [1, 0, 0, 0, 0, 0], 8]], "CHAPITRES": [["La Nativité", null, 62, 21, 10], ["Traditions et symboles", null, 55, 15, 0], ["Saints et porteurs de cadeaux", null, 24, 9, 0], ["Origines et fêtes d'hiver", null, 16, 7, 0], ["Films de Noël", null, 53, 9, 0], ["Animation, séries et acteurs", null, 58, 9, 1], ["Table de Noël", "ced_visno", 82, 32, 5], ["Jouets et cadeaux", "Dahevic", 37, 0, 0], ["Hiver et nature", "Cuervo", 33, 2, 0], ["Marchés, villes et Noël dans le monde", "sergent tibs", 62, 27, 5], ["Histoire, pop culture et pub", "MarionEddie", 36, 14, 3], ["Musique et littérature", "Axle92", 63, 18, 9]], "AUTRES": [["Ovalini", 142, 129], ["Le Grand Recensement", 225, 78]], "COURBE": {"open": [["2026-11-24T22:00:00+01:00", 581], ["2026-11-25T00:00:00+01:00", 581]], "posed": [["2026-11-24T22:00:00+01:00", 0], ["2026-11-25T07:54:48+01:00", 33], ["2026-11-25T21:16:09+01:00", 163]], "start": "2026-11-24T22:00:00+01:00", "end": "2026-12-25T23:59:00+01:00", "last": "2026-11-25T21:16:09+01:00"}};
   const { COLORS, POOL, JOUEURS, CHAPITRES, AUTRES } = DATA;
   document.getElementById("when").textContent = DATA.when;
   document.getElementById("autres-when").textContent = DATA.autres_when;
@@ -130,5 +147,53 @@
     + `<div class="kpi"><div class="l">En bonus</div><div class="v">${DATA.bonus} <span class="q">?</span></div></div>`;
   document.getElementById("autres").innerHTML = AUTRES.map(([name, total, own]) =>
     `<tr><td>${name}</td><td class="num">${own} / ${total}</td>${bar(own, total)}${num(total - own)}</tr>`).join("");
+  (() => {
+    const K = DATA.COURBE, NS = "http://www.w3.org/2000/svg", svg = document.getElementById("courbe"), box = svg.parentNode;
+    const MOIS = ["janv.", "févr.", "mars", "avr.", "mai", "juin", "juil.", "août", "sept.", "oct.", "nov.", "déc."];
+    const ms = s => new Date(s).getTime(), t0 = ms(K.start), t1 = ms(K.end), tL = ms(K.last);
+    const open = K.open.map(([t, n]) => [ms(t), n]), posed = K.posed.map(([t, n]) => [ms(t), n]);
+    const openAt = t => open.reduce((a, r) => r[0] <= t ? r[1] : a, 0);
+    const day = t => { const d = new Date(t); return `${d.getDate()} ${MOIS[d.getMonth()]}`; };
+    const full = t => { const d = new Date(t); return `${day(t)} à ${d.getHours()}h${String(d.getMinutes()).padStart(2, "0")}`; };
+    const el = (tag, a, p) => { const e = document.createElementNS(NS, tag); for (const k in a) e.setAttribute(k, a[k]); p.appendChild(e); return e; };
+    const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+    const tip = document.createElement("div"); tip.className = "tip"; tip.hidden = true; box.appendChild(tip);
+    function draw() {
+      const W = svg.clientWidth || 900, h = W < 560 ? 240 : 300, M = { l: 42, r: 14, t: 14, b: 28 };
+      svg.setAttribute("viewBox", `0 0 ${W} ${h}`); svg.setAttribute("height", h); svg.innerHTML = "";
+      const top = open[open.length - 1][1], st = [10, 20, 25, 50, 100, 200, 250, 500].find(s => Math.ceil(top * 1.05 / s) <= 7) || 1000;
+      const yMax = Math.ceil(top * 1.05 / st) * st;
+      const x = t => M.l + (t - t0) / (t1 - t0) * (W - M.l - M.r), y = v => h - M.b - v / yMax * (h - M.t - M.b);
+      for (let v = 0; v <= yMax; v += st) {
+        el("line", { x1: M.l, x2: W - M.r, y1: y(v), y2: y(v), stroke: v ? "rgba(255,255,255,.07)" : "rgba(224,194,122,.35)" }, svg);
+        el("text", { x: M.l - 8, y: y(v) + 4, "text-anchor": "end" }, svg).textContent = v;
+      }
+      const wk = W < 560 ? 14 : 7;
+      for (let t = ms("2026-11-25T00:00:00+01:00"); t <= t1; t += wk * 864e5)
+        el("text", { x: x(t), y: h - 8, "text-anchor": "middle" }, svg).textContent = day(t);
+      let d = ""; open.forEach(([t, n], i) => { d += i ? ` H${x(t)} V${y(n)}` : `M${x(t)} ${y(n)}`; }); d += ` H${x(tL)}`;
+      el("path", { d: d + ` V${y(0)} H${x(t0)} Z`, fill: "rgba(224,194,122,.12)" }, svg);
+      el("path", { d, fill: "none", stroke: css("--gold"), "stroke-width": 2 }, svg);
+      el("path", { d: posed.map(([t, n], i) => `${i ? "L" : "M"}${x(t)} ${y(n)}`).join(" "), fill: "none", stroke: css("--green"), "stroke-width": 2, "stroke-linejoin": "round" }, svg);
+      for (const [t, n] of posed) el("circle", { cx: x(t), cy: y(n), r: 4.5, fill: css("--green"), stroke: "#13224a", "stroke-width": 2 }, svg);
+      const lp = posed[posed.length - 1];
+      el("text", { x: x(tL) + 10, y: y(top) + 4, class: "lbl" }, svg).textContent = `Ouvertes : ${top}`;
+      el("text", { x: x(lp[0]) + 10, y: y(lp[1]) + 4, class: "lbl" }, svg).textContent = `Posées : ${lp[1]}`;
+      const cross = el("line", { y1: M.t, y2: h - M.b, stroke: "rgba(255,255,255,.25)", "stroke-dasharray": "3 3", visibility: "hidden" }, svg);
+      const hit = el("rect", { x: M.l, y: 0, width: W - M.l - M.r, height: h, fill: "transparent" }, svg);
+      const move = ev => {
+        const r = svg.getBoundingClientRect(), sx = ((ev.touches ? ev.touches[0].clientX : ev.clientX) - r.left) * W / r.width;
+        const t = Math.max(t0, Math.min(tL, t0 + (sx - M.l) / (W - M.l - M.r) * (t1 - t0)));
+        let p = posed[0]; for (const q of posed) if (Math.abs(q[0] - t) < Math.abs(p[0] - t)) p = q;
+        const near = Math.abs(p[0] - t) < 12 * 36e5, tt = near ? p[0] : t;
+        tip.innerHTML = near ? `${full(p[0])}<br>Posées : <b>${p[1]}</b><br>Ouvertes : <b>${openAt(p[0])}</b>` : `${day(t)}<br>Ouvertes : <b>${openAt(t)}</b>`;
+        tip.hidden = false; cross.setAttribute("x1", x(tt)); cross.setAttribute("x2", x(tt)); cross.setAttribute("visibility", "visible");
+        tip.style.left = (svg.offsetLeft + x(tt) * r.width / W) + "px"; tip.style.top = (svg.offsetTop + y(near ? p[1] : openAt(t)) * r.height / h) + "px";
+      };
+      hit.addEventListener("mousemove", move); hit.addEventListener("touchstart", move, { passive: true });
+      hit.addEventListener("mouseleave", () => { tip.hidden = true; cross.setAttribute("visibility", "hidden"); });
+    }
+    draw(); let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(draw, 120); });
+  })();
 </script>
 </body></html>
