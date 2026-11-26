@@ -58,6 +58,7 @@
   #courbe { width:100%; display:block; overflow:visible; }
   #courbe text { fill:var(--muted); font:12px var(--sans); font-variant-numeric:tabular-nums; }
   #courbe text.lbl { fill:var(--text); font-weight:600; }
+  #courbe text.xmas { fill:#ff9a9a; font-size:13px; }
   .tip { position:absolute; pointer-events:none; background:#f3efe2; color:#14203f; padding:7px 10px; border-radius:8px; font-size:12.5px; line-height:1.4;
          white-space:nowrap; transform:translate(-50%, calc(-100% - 12px)); z-index:2; box-shadow:0 4px 14px rgba(0,0,0,.35); }
   footer { margin-top:40px; color:var(--dim); font-size:13px; }
@@ -113,7 +114,7 @@
 <footer>Projet entre amis. Jeu, nom et visuels à WikiMasters, images Wikipédia.</footer>
 </main>
 <script>
-  const DATA = {"when": "Collections lues le 26 novembre à 9h47. Lecture précédente : 25 novembre à 21h16.", "prev_label": "Depuis la lecture précédente", "autres_when": "Dernière lecture : 26 novembre à 9h49.", "bonus": 51, "COLORS": {"MarionEddie": "#e07a5f", "ced_visno": "#3d9be9", "Axle92": "#5fae8a", "sergent tibs": "#e3b23c", "Dahevic": "#a77bdc", "Cuervo": "#e57fa8"}, "POOL": ["Nativité", "Traditions", "Saints", "Origines", "Films", "Animation"], "JOUEURS": [["MarionEddie", 16, [2, 3, 0, 2, 8, 5], 20], ["ced_visno", 34, [10, 19, 8, 6, 0, 0], 10], ["Axle92", 22, [2, 0, 3, 0, 1, 4], 5], ["sergent tibs", 30, [9, 1, 0, 0, 0, 0], 0], ["Dahevic", 0, [0, 0, 0, 0, 0, 0], 0], ["Cuervo", 6, [1, 0, 0, 0, 1, 0], 19]], "CHAPITRES": [["La Nativité", null, 62, 23, 21], ["Traditions et symboles", null, 55, 22, 15], ["Saints et porteurs de cadeaux", null, 24, 9, 9], ["Origines et fêtes d'hiver", null, 16, 8, 7], ["Films de Noël", null, 53, 10, 9], ["Animation, séries et acteurs", null, 58, 9, 9], ["Table de Noël", "ced_visno", 82, 34, 32], ["Jouets et cadeaux", "Dahevic", 37, 0, 0], ["Hiver et nature", "Cuervo", 33, 6, 2], ["Marchés, villes et Noël dans le monde", "sergent tibs", 62, 30, 27], ["Histoire, pop culture et pub", "MarionEddie", 36, 16, 14], ["Musique et littérature", "Axle92", 63, 22, 18]], "AUTRES": [["Ovalini", 142, 133], ["Le Grand Recensement", 225, 78]], "COURBE": {"open": [["2026-11-24T22:00:00+01:00", 581], ["2026-11-25T00:00:00+01:00", 581], ["2026-11-26T00:00:00+01:00", 581]], "posed": [["2026-11-24T22:00:00+01:00", 0], ["2026-11-25T07:54:48+01:00", 33], ["2026-11-25T21:16:09+01:00", 163], ["2026-11-26T09:47:52+01:00", 189]], "start": "2026-11-24T22:00:00+01:00", "end": "2026-12-25T23:59:00+01:00", "last": "2026-11-26T09:47:52+01:00"}};
+  const DATA = {"when": "Collections lues le 26 novembre à 9h47. Lecture précédente : 25 novembre à 21h16.", "prev_label": "Depuis la lecture précédente", "autres_when": "Dernière lecture : 26 novembre à 9h49.", "bonus": 51, "COLORS": {"MarionEddie": "#e07a5f", "ced_visno": "#3d9be9", "Axle92": "#5fae8a", "sergent tibs": "#e3b23c", "Dahevic": "#a77bdc", "Cuervo": "#e57fa8"}, "POOL": ["Nativité", "Traditions", "Saints", "Origines", "Films", "Animation"], "JOUEURS": [["MarionEddie", 16, [2, 3, 0, 2, 8, 5], 20], ["ced_visno", 34, [10, 19, 8, 6, 0, 0], 10], ["Axle92", 22, [2, 0, 3, 0, 1, 4], 5], ["sergent tibs", 30, [9, 1, 0, 0, 0, 0], 0], ["Dahevic", 0, [0, 0, 0, 0, 0, 0], 0], ["Cuervo", 6, [1, 0, 0, 0, 1, 0], 19]], "CHAPITRES": [["La Nativité", null, 62, 23, 21], ["Traditions et symboles", null, 55, 22, 15], ["Saints et porteurs de cadeaux", null, 24, 9, 9], ["Origines et fêtes d'hiver", null, 16, 8, 7], ["Films de Noël", null, 53, 10, 9], ["Animation, séries et acteurs", null, 58, 9, 9], ["Table de Noël", "ced_visno", 82, 34, 32], ["Jouets et cadeaux", "Dahevic", 37, 0, 0], ["Hiver et nature", "Cuervo", 33, 6, 2], ["Marchés, villes et Noël dans le monde", "sergent tibs", 62, 30, 27], ["Histoire, pop culture et pub", "MarionEddie", 36, 16, 14], ["Musique et littérature", "Axle92", 63, 22, 18]], "AUTRES": [["Ovalini", 142, 133], ["Le Grand Recensement", 225, 78]], "COURBE": {"open": [["2026-11-24T22:00:00+01:00", 581], ["2026-11-25T00:00:00+01:00", 581], ["2026-11-26T00:00:00+01:00", 581]], "posed": [["2026-11-24T22:00:00+01:00", 0], ["2026-11-25T07:54:48+01:00", 33], ["2026-11-25T21:16:09+01:00", 163], ["2026-11-26T09:47:52+01:00", 189]], "start": "2026-11-24T22:00:00+01:00", "end": "2027-01-06T23:59:00+01:00", "last": "2026-11-26T09:47:52+01:00"}};
   const { COLORS, POOL, JOUEURS, CHAPITRES, AUTRES } = DATA;
   document.getElementById("when").textContent = DATA.when;
   document.getElementById("autres-when").textContent = DATA.autres_when;
@@ -159,7 +160,7 @@
     const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
     const tip = document.createElement("div"); tip.className = "tip"; tip.hidden = true; box.appendChild(tip);
     function draw() {
-      const W = svg.clientWidth || 900, h = W < 560 ? 240 : 300, M = { l: 42, r: 14, t: 14, b: 28 };
+      const W = svg.clientWidth || 900, h = W < 560 ? 240 : 300, M = { l: 42, r: 14, t: 34, b: 28 };
       svg.setAttribute("viewBox", `0 0 ${W} ${h}`); svg.setAttribute("height", h); svg.innerHTML = "";
       const top = open[open.length - 1][1], st = [10, 20, 25, 50, 100, 200, 250, 500].find(s => Math.ceil(top * 1.05 / s) <= 7) || 1000;
       const yMax = Math.ceil(top * 1.05 / st) * st;
@@ -168,9 +169,24 @@
         el("line", { x1: M.l, x2: W - M.r, y1: y(v), y2: y(v), stroke: v ? "rgba(255,255,255,.07)" : "rgba(224,194,122,.35)" }, svg);
         el("text", { x: M.l - 8, y: y(v) + 4, "text-anchor": "end" }, svg).textContent = v;
       }
-      const wk = W < 560 ? 14 : 7;
-      for (let t = ms("2026-11-25T00:00:00+01:00"); t <= t1; t += wk * 864e5)
-        el("text", { x: x(t), y: h - 8, "text-anchor": "middle" }, svg).textContent = day(t);
+      // weeks: Monday lines, one band out of two slightly lighter, date of each Monday under the axis
+      const at = s => ms(s + "T00:00:00+01:00"), mondays = [];
+      for (let t = at("2026-11-30"); t < t1; t += 7 * 864e5) mondays.push(t);
+      const edges = [t0, ...mondays, t1];
+      for (let i = 1; i < edges.length - 1; i += 2)
+        el("rect", { x: x(edges[i]), y: M.t, width: x(edges[i + 1]) - x(edges[i]), height: h - M.t - M.b, fill: "rgba(255,255,255,.035)" }, svg);
+      mondays.forEach((t, i) => {
+        el("line", { x1: x(t), x2: x(t), y1: M.t, y2: h - M.b, stroke: "rgba(255,255,255,.16)" }, svg);
+        if (W >= 560 || i % 2 === 0) el("text", { x: x(t), y: h - 8, "text-anchor": "middle" }, svg).textContent = day(t);
+      });
+      if (W >= 560) el("text", { x: x(t0), y: h - 8, "text-anchor": "start" }, svg).textContent = day(t0);
+      // milestones, named above the plot
+      const d1 = at("2026-12-01"), xmas = at("2026-12-25");
+      el("line", { x1: x(d1), x2: x(d1), y1: M.t - 6, y2: h - M.b, stroke: css("--gold"), "stroke-width": 1.5, "stroke-dasharray": "5 4", opacity: .8 }, svg);
+      el("text", { x: x(d1) + 5, y: M.t - 12, class: "lbl", "text-anchor": "start" }, svg).textContent = "1er décembre";
+      el("rect", { x: x(xmas), y: M.t, width: x(xmas + 864e5) - x(xmas), height: h - M.t - M.b, fill: "rgba(232,93,93,.22)" }, svg);
+      el("line", { x1: x(xmas), x2: x(xmas), y1: M.t - 6, y2: h - M.b, stroke: "#ff7b7b", "stroke-width": 2 }, svg);
+      el("text", { x: x(xmas + 432e5), y: M.t - 12, class: "lbl xmas", "text-anchor": "middle" }, svg).textContent = "★ Noël";
       let d = ""; open.forEach(([t, n], i) => { d += i ? ` H${x(t)} V${y(n)}` : `M${x(t)} ${y(n)}`; }); d += ` H${x(tL)}`;
       el("path", { d: d + ` V${y(0)} H${x(t0)} Z`, fill: "rgba(224,194,122,.12)" }, svg);
       el("path", { d, fill: "none", stroke: css("--gold"), "stroke-width": 2 }, svg);
